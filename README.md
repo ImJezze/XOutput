@@ -3,7 +3,7 @@ This version has been fixed in order to support XBCD controllers, however curren
 
 Setup in XBCD must go like this:
 
-![alt tag](https://raw.githubusercontent.com/joao678/XOutput/master/Capturar.PNG)
+![alt tag](https://raw.githubusercontent.com/joao678/XOutput/master/setup.png)
 
 # Building
 
