@@ -160,13 +160,19 @@ namespace XOutput
                     Unplug(i + 1);
                 }
             }
-
+			
+			int isXBCDDevice = 0;
+			
             foreach (var deviceInstance in directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly))
             {
                 Joystick joystick = new Joystick(directInput, deviceInstance.InstanceGuid);
-
-                if (joystick.Information.ProductGuid.ToString() == "028e045e-0000-0000-0000-504944564944") //If its an emulated controller skip it
-                    continue;
+				
+				if( isXBCDDevice == 0 ) {
+					isXBCDDevice += 1;
+				} else {
+					if (joystick.Information.ProductGuid.ToString() == "028e045e-0000-0000-0000-504944564944") //If its an emulated controller skip it
+					continue;
+				}
 
                 if (joystick.Capabilities.ButtonCount < 1 && joystick.Capabilities.AxesCount < 1) //Skip if it doesn't have any button and axes
                     continue;
