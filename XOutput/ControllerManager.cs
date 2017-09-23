@@ -153,7 +153,7 @@ namespace XOutput
             {
                 if (devices[i] != null && !directInput.IsDeviceAttached(devices[i].joystick.Information.InstanceGuid))
                 {
-                    Console.WriteLine(devices[i].joystick.Properties.InstanceName + " Removed");
+                    Console.WriteLine("Slot {0} removed.", devices[i].joystick.Properties.InstanceName);
                     devices[i] = null;
                     workers[i].Abort();
                     workers[i] = null;
