@@ -18,6 +18,7 @@ namespace XOutput
 
         private DirectInput directInput;
         private ControllerDevice[] devices;
+        public int deviceCount = 0;
         public bool running = false;
         private Thread[] workers = new Thread[4];
         public const String BUS_CLASS_GUID = "{F679F562-3164-42CE-A4DB-E7DDBE723909}";
@@ -32,7 +33,7 @@ namespace XOutput
             : base(BUS_CLASS_GUID)
         {
             directInput = new DirectInput();
-            devices = new ControllerDevice[4];
+            devices = new ControllerDevice[1];
             handle = _handle;
             ds4locks[0] = new object();
             ds4locks[1] = new object();
@@ -45,7 +46,7 @@ namespace XOutput
         public void changeExclusive(bool e)
         {
             isExclusive = e;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < deviceCount; i++)
             {
                 if (devices[i] != null)
                 {
@@ -69,22 +70,6 @@ namespace XOutput
         {
             return devices[n];
 
-        }
-
-        public void Swap(int i, int p)
-        {
-            if (true)//devices[i - 1] != null && devices[p - 1] != null)
-            {
-
-                ControllerDevice s = devices[i - 1];
-                devices[i - 1] = devices[p - 1];
-                devices[p - 1] = s;
-                devices[p - 1].changeNumber(p);
-
-                if (devices[i - 1] != null)
-                    devices[i - 1].changeNumber(i);
-
-            }
         }
 
         public void setControllerEnable(int i, bool b)
@@ -129,7 +114,7 @@ namespace XOutput
             Open();
             detectControllers();
             running = true;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < deviceCount; i++)
             {
                 if (devices[i] != null && devices[i].enabled)
                 {
@@ -149,19 +134,24 @@ namespace XOutput
 
         public ControllerDevice[] detectControllers()
         {
-            for (int i = 0; i < 4; i++) //Remove disconnected controllers
+            deviceCount = getDeviceCount()[0];
+            int allDeviceCount = getDeviceCount()[1];
+            Console.WriteLine("Detected {0} attached controllers out of {1} controllers in total.", deviceCount, allDeviceCount);
+            Array.Resize(ref devices, allDeviceCount);
+            for (int i = 0; i < allDeviceCount; i++) //Remove disconnected controllers
             {
                 if (devices[i] != null && !directInput.IsDeviceAttached(devices[i].joystick.Information.InstanceGuid))
                 {
-                    Console.WriteLine("Slot {0} removed.", devices[i].joystick.Properties.InstanceName);
+                    Console.WriteLine("{0} removed.", devices[i].joystick.Properties.InstanceName);
                     devices[i] = null;
                     workers[i].Abort();
                     workers[i] = null;
                     Unplug(i + 1);
                 }
             }
-			
-			int isXBCDDevice = 0;
+            Array.Resize(ref devices, deviceCount);
+
+            int isXBCDDevice = 0;
 			
             foreach (var deviceInstance in directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly))
             {
@@ -178,7 +168,7 @@ namespace XOutput
                     continue;
 
                 int spot = -1;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < deviceCount; i++)
                 {
                     if (devices[i] == null)
                     {
@@ -225,12 +215,20 @@ namespace XOutput
             return devices;
         }
 
+        public int[] getDeviceCount()
+        {
+            int[] i = new int[2];
+            i[0] = directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly).Count;
+            i[1] = directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AllDevices).Count;
+            return i;
+        }
+
         public override bool Stop()
         {
             if (running)
             {
                 running = false;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < deviceCount; i++)
                 {
                     if (devices[i] != null && devices[i].enabled)
                     {
@@ -242,6 +240,7 @@ namespace XOutput
                 }
 
             }
+            deviceCount = getDeviceCount()[0];
             return base.Stop();
         }
 
@@ -287,7 +286,6 @@ namespace XOutput
 
                 return DeviceIoControl(m_FileHandle, 0x2A4004, Buffer, Buffer.Length, null, 0, ref Transfered, IntPtr.Zero);
             }
-
             return false;
         }
 

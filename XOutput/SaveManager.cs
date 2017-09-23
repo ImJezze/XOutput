@@ -72,14 +72,15 @@ namespace XOutput
             return new byte[] { (byte)(i * 2), l, num};
         }
 
-        public static byte[] Load(string devName) {
+        public static byte[] Load(string devGUID) {
             if (!Directory.Exists(dirName)) {
                 Directory.CreateDirectory(dirName);
                 return null;
             }
-            string path = dirName + "\\" + devName + ".ini";
+            string path = dirName + "\\" + devGUID + ".ini";
             if (!File.Exists(path)) {
-                File.Create(path);
+                File.Create(path).Close();
+
                 return null;
             }
             byte[] mapping = new byte[42];
@@ -96,11 +97,11 @@ namespace XOutput
             return mapping;
         }
         
-        public static void Save(string devName, byte[] mapping) {
+        public static void Save(string devGUID, byte[] mapping) {
             if (!Directory.Exists(dirName)) {
                 Directory.CreateDirectory(dirName);
             }
-            string path = dirName + "\\" + devName + ".ini";
+            string path = dirName + "\\" + devGUID + ".ini";
             if (!File.Exists(path)) {
                 File.Create(path);
             }

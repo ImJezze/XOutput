@@ -10,12 +10,6 @@ namespace XOutput
         public XOut()
         {
             InitializeComponent();
-            /*
-            this.enabledOne.CheckedChanged += (sender, e) => enabledChanged(0);
-            this.enabledTwo.CheckedChanged += (sender, e) => enabledChanged(1);
-            this.enabledThree.CheckedChanged += (sender, e) => enabledChanged(2);
-            this.enabledFour.CheckedChanged += (sender, e) => enabledChanged(3);
-            */
             this.controllerList.ItemCheck += (sender, e) => enabledChanged(e.Index, e.NewValue);
         }
 
@@ -52,15 +46,8 @@ namespace XOutput
                     StartStopBtn.Text = "Stop";
                     for (int i = 0; i < 4; i++)
                     {
-                        //checks[i].Enabled = false;
                         controllerList.Enabled = false;
                         isExclusive.Enabled = false;
-                        /*
-                        foreach (Control con in boxes[i].Controls)
-                        {
-                            con.Enabled = false;
-                        }
-                        */
                     }
                 }
             }
@@ -69,17 +56,10 @@ namespace XOutput
                 if (controllerManager.Stop())
                 {
                     StartStopBtn.Text = "Start";
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < controllerManager.deviceCount; i++)
                     {
-                        //checks[i].Enabled = true;
                         controllerList.Enabled = true;
                         isExclusive.Enabled = true;
-                        /*
-                        foreach (Control con in boxes[i].Controls)
-                        {
-                            con.Enabled = true;
-                        }
-                        */
                     }
                 }
             }
@@ -87,15 +67,10 @@ namespace XOutput
 
         private void UpdateInfo(ControllerDevice[] dev)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < controllerManager.deviceCount; i++)
             {
                 if (dev[i] != null)
                 {
-                    /*
-                    boxes[i].Visible = true;
-                    boxes[i].Text = (i + 1).ToString() + ": " + dev[i].name;
-                    checks[i].Visible = true;
-                    */
                     if (controllerList.Items.Count > i)
                     {
                         controllerList.Items.RemoveAt(i);
@@ -106,10 +81,6 @@ namespace XOutput
                 }
                 else
                 {
-                    /*
-                    boxes[i].Visible = false;
-                    checks[i].Visible = false;
-                    */
                     if (controllerList.Items.Count > i)
                     {
                         controllerList.Items.RemoveAt(i);
@@ -119,24 +90,8 @@ namespace XOutput
             }
         }
 
-        private void Swap(int i, int p)
-        {
-            bool s = checks[i - 1].Checked;
-            checks[i- 1].Checked = checks[p - 1].Checked;
-            checks[p - 1].Checked = s;
-            controllerManager.Swap(i, p);
-            
-            UpdateInfo(controllerManager.detectControllers());
-        }
-
-
-
         private void enabledChanged(int i, CheckState st)
         {
-            /*
-            boxes[i].Enabled = checks[i].Checked;
-            controllerManager.setControllerEnable(i, checks[i].Checked);
-            */
             bool enable = true;
      
             switch (st)
@@ -196,21 +151,19 @@ namespace XOutput
             controllerManager.changeExclusive(!controllerManager.isExclusive);
         }
 
-        private void controllerList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void controllerList_MouseUp(object sender, MouseEventArgs e)
         {
-            switch (e.Button)
+            if (e.Button == MouseButtons.Right && this.controllerList.IndexFromPoint(e.Location) >= 0)
             {
-                case MouseButtons.Right:
-                    int index = this.controllerList.IndexFromPoint(e.Location);
-                    controllerList.SetSelected(index, true);
-                    openOptions(index);
-                    break;
+                int index = this.controllerList.IndexFromPoint(e.Location);
+                controllerList.SetSelected(index, true);
+                openOptions(index);
             }
+        }
+
+        private void settingsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("control", "joy.cpl");
         }
     }
 }
