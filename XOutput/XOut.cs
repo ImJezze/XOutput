@@ -10,24 +10,13 @@ namespace XOutput
         public XOut()
         {
             InitializeComponent();
-            this.moveOneDown.Click += (sender, e) => Swap(1, 2);
-            this.moveTwoUp.Click += (sender, e) => Swap(2, 1);
-            this.moveTwoDown.Click += (sender, e) => Swap(2, 3);
-            this.moveThreeUp.Click += (sender, e) => Swap(3, 2);
-            this.moveThreeDown.Click += (sender, e) => Swap(3, 4);
-            this.moveFourUp.Click += (sender, e) => Swap(4, 3);
+            /*
             this.enabledOne.CheckedChanged += (sender, e) => enabledChanged(0);
             this.enabledTwo.CheckedChanged += (sender, e) => enabledChanged(1);
             this.enabledThree.CheckedChanged += (sender, e) => enabledChanged(2);
             this.enabledFour.CheckedChanged += (sender, e) => enabledChanged(3);
-            this.optionsOne.Click += (sender, e) => openOptions(0);
-            this.optionsTwo.Click += (sender, e) => openOptions(1);
-            this.optionsThree.Click += (sender, e) => openOptions(2);
-            this.optionsFour.Click += (sender, e) => openOptions(3);
-
-            boxes = new System.Windows.Forms.GroupBox[4] { controllerBoxOne, controllerBoxTwo, controllerBoxThree, controllerBoxFour };
-            checks = new System.Windows.Forms.CheckBox[4] { enabledOne, enabledTwo, enabledThree, enabledFour };
-            options = new System.Windows.Forms.Button[4] { optionsOne, optionsTwo, optionsThree, optionsFour };
+            */
+            this.controllerList.ItemCheck += (sender, e) => enabledChanged(e.Index, e.NewValue);
         }
 
         private void XOut_Load(object sender, EventArgs e)
@@ -63,12 +52,15 @@ namespace XOutput
                     StartStopBtn.Text = "Stop";
                     for (int i = 0; i < 4; i++)
                     {
-                        checks[i].Enabled = false;
+                        //checks[i].Enabled = false;
+                        controllerList.Enabled = false;
                         isExclusive.Enabled = false;
+                        /*
                         foreach (Control con in boxes[i].Controls)
                         {
                             con.Enabled = false;
                         }
+                        */
                     }
                 }
             }
@@ -79,12 +71,15 @@ namespace XOutput
                     StartStopBtn.Text = "Start";
                     for (int i = 0; i < 4; i++)
                     {
-                        checks[i].Enabled = true;
+                        //checks[i].Enabled = true;
+                        controllerList.Enabled = true;
                         isExclusive.Enabled = true;
+                        /*
                         foreach (Control con in boxes[i].Controls)
                         {
                             con.Enabled = true;
                         }
+                        */
                     }
                 }
             }
@@ -96,14 +91,30 @@ namespace XOutput
             {
                 if (dev[i] != null)
                 {
+                    /*
                     boxes[i].Visible = true;
                     boxes[i].Text = (i + 1).ToString() + ": " + dev[i].name;
                     checks[i].Visible = true;
+                    */
+                    if (controllerList.Items.Count > i)
+                    {
+                        controllerList.Items.RemoveAt(i);
+                    }
+                    controllerList.Items.Insert(i, (i + 1).ToString() + ": " + dev[i].name);
+                    controllerList.SetItemChecked(i, dev[i].enabled);
+                    Console.WriteLine("Index {0} hinzugefügt", i);
                 }
                 else
                 {
+                    /*
                     boxes[i].Visible = false;
                     checks[i].Visible = false;
+                    */
+                    if (controllerList.Items.Count > i)
+                    {
+                        controllerList.Items.RemoveAt(i);
+                        Console.WriteLine("Index {0} entfernt", i);
+                    }
                 }
             }
         }
@@ -120,25 +131,46 @@ namespace XOutput
 
 
 
-        private void enabledChanged(int i)
+        private void enabledChanged(int i, CheckState st)
         {
+            /*
             boxes[i].Enabled = checks[i].Checked;
             controllerManager.setControllerEnable(i, checks[i].Checked);
+            */
+            bool enable = true;
+     
+            switch (st)
+            {
+                case CheckState.Checked:
+                    enable = true;
+                    break;
+                case CheckState.Unchecked:
+                    enable = false;
+                    break;
+                default:
+                    break;
+            }
+            controllerManager.setControllerEnable(i, enable);
+
+            Console.WriteLine("Controller {0} enabled: {1}", i, enable);
         }
 
         private void openOptions(int i)
         {
-            if (optionsWindow == null)
+            if (i >= 0)
             {
-                optionsWindow = new ControllerOptions(controllerManager.getController(i));
-                optionsWindow.Show();
-                optionsWindow.Activate();
-                optionsWindow.FormClosed += (sender, e) => { optionsWindow = null; };
-            }
-            else
-            {
-                System.Media.SystemSounds.Asterisk.Play();
-                optionsWindow.Focus();
+                if (optionsWindow == null)
+                {
+                    optionsWindow = new ControllerOptions(controllerManager.getController(i));
+                    optionsWindow.Show();
+                    optionsWindow.Activate();
+                    optionsWindow.FormClosed += (sender, e) => { optionsWindow = null; };
+                }
+                else
+                {
+                    System.Media.SystemSounds.Asterisk.Play();
+                    optionsWindow.Focus();
+                }
             }
         }
 
@@ -164,6 +196,21 @@ namespace XOutput
             controllerManager.changeExclusive(!controllerManager.isExclusive);
         }
 
+        private void controllerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void controllerList_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Right:
+                    int index = this.controllerList.IndexFromPoint(e.Location);
+                    controllerList.SetSelected(index, true);
+                    openOptions(index);
+                    break;
+            }
+        }
     }
 }
