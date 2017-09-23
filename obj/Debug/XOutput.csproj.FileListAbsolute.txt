@@ -1,0 +1,41 @@
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\XOutput.exe.config
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\XOutput.exe
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\XOutput.pdb
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\mscorlib.dll
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\SlimDX.dll
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\pt-BR\mscorlib.resources.dll
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\normidna.nlp
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\normnfc.nlp
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\normnfd.nlp
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\normnfkc.nlp
+C:\Users\Casa\Desktop\XOutput-master\XOutput\bin\Debug\normnfkd.nlp
+C:\Users\Casa\Desktop\XOutput-master\XOutput\obj\Debug\XOutput.csprojResolveAssemblyReference.cache
+C:\Users\Casa\Desktop\XOutput-master\XOutput\obj\Debug\XOutput.Properties.Resources.resources
+C:\Users\Casa\Desktop\XOutput-master\XOutput\obj\Debug\XOutput.XOut.resources
+C:\Users\Casa\Desktop\XOutput-master\XOutput\obj\Debug\XOutput.csproj.GenerateResource.Cache
+C:\Users\Casa\Desktop\XOutput-master\XOutput\obj\Debug\XOutput.exe
+C:\Users\Casa\Desktop\XOutput-master\XOutput\obj\Debug\XOutput.pdb
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.exe.config
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.exe
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.pdb
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.csprojResolveAssemblyReference.cache
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.Properties.Resources.resources
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.XOut.resources
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.csproj.GenerateResource.Cache
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.csproj.CoreCompileInputs.cache
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.exe
+C:\Users\John\Documents\Visual Studio 2017\Projects\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.pdb
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.exe.config
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.exe
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.pdb
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.csprojResolveAssemblyReference.cache
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.Properties.Resources.resources
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.XOut.resources
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.csproj.GenerateResource.Cache
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.csproj.CoreCompileInputs.cache
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.exe
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.pdb
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.exe.manifest
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\bin\Debug\XOutput.application
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.exe.manifest
+C:\Users\John\source\repos\XOutput-XBCD-0.12\XOutput\obj\Debug\XOutput.application
