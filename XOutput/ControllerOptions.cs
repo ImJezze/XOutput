@@ -13,6 +13,7 @@ namespace XOutput
         {
             InitializeComponent();
             dev = device;
+            this.Text = (dev.name + " (" + dev.joystick.Information.ProductGuid + ")");
             int ind = 0;
 
             foreach (MultiLevelComboBox m in this.Controls.OfType<MultiLevelComboBox>()) {

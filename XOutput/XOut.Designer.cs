@@ -32,6 +32,7 @@
             this.StartStopBtn = new System.Windows.Forms.Button();
             this.isExclusive = new System.Windows.Forms.CheckBox();
             this.controllerList = new System.Windows.Forms.CheckedListBox();
+            this.settingsLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // StartStopBtn
@@ -63,14 +64,25 @@
             this.controllerList.Name = "controllerList";
             this.controllerList.Size = new System.Drawing.Size(460, 289);
             this.controllerList.TabIndex = 10;
-            this.controllerList.SelectedIndexChanged += new System.EventHandler(this.controllerList_SelectedIndexChanged);
             this.controllerList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.controllerList_MouseUp);
+            // 
+            // settingsLabel
+            // 
+            this.settingsLabel.AutoSize = true;
+            this.settingsLabel.Location = new System.Drawing.Point(93, 321);
+            this.settingsLabel.Name = "settingsLabel";
+            this.settingsLabel.Size = new System.Drawing.Size(70, 13);
+            this.settingsLabel.TabIndex = 11;
+            this.settingsLabel.TabStop = true;
+            this.settingsLabel.Text = "Control Panel";
+            this.settingsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.settingsLabel_LinkClicked);
             // 
             // XOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.settingsLabel);
             this.Controls.Add(this.controllerList);
             this.Controls.Add(this.isExclusive);
             this.Controls.Add(this.StartStopBtn);
@@ -98,5 +110,6 @@
         private ControllerManager controllerManager;
         private System.Windows.Forms.CheckBox isExclusive;
         private System.Windows.Forms.CheckedListBox controllerList;
+        private System.Windows.Forms.LinkLabel settingsLabel;
     }
 }
