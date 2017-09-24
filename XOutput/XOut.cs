@@ -77,14 +77,12 @@ namespace XOutput
                     }
                     controllerList.Items.Insert(i, (i + 1).ToString() + ": " + dev[i].name);
                     controllerList.SetItemChecked(i, dev[i].enabled);
-                    Console.WriteLine("Index {0} hinzugefügt", i);
                 }
                 else
                 {
                     if (controllerList.Items.Count > i)
                     {
                         controllerList.Items.RemoveAt(i);
-                        Console.WriteLine("Index {0} entfernt", i);
                     }
                 }
             }
@@ -129,7 +127,23 @@ namespace XOutput
             }
         }
 
-        protected override void WndProc(ref Message m)
+        private void XOut_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                notifyIcon.Visible = true;
+                this.Hide();
+            }
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon.Visible = false;
+        }
+
+        protected override void WndProc(ref Message m)    //update controllers on device change
         {
             try
             {
@@ -137,6 +151,7 @@ namespace XOutput
                 {
                     lock (this)
                     {
+                        Console.WriteLine("Device change detected. Updating devices...");
                         UpdateInfo(controllerManager.detectControllers());
                     }
                 }

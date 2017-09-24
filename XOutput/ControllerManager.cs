@@ -113,14 +113,14 @@ namespace XOutput
             Console.WriteLine(Process.GetCurrentProcess().MainWindowHandle);
             Open();
             detectControllers();
-            running = true;
+
             for (int i = 0; i < deviceCount; i++)
             {
                 if (devices[i] != null && devices[i].enabled)
                 {
-                    running = true;
+                    //running = true;
                     processingData[i] = new ContData();
-                    Console.WriteLine("Plug " + i);
+                    Console.WriteLine("Plugged in device at slot {0}. ", i);
                     Plugin(i + 1);
                     int t = i;
                     workers[i] = new Thread(() =>
@@ -129,6 +129,7 @@ namespace XOutput
                 }
             }
 
+            running = true;
             return running;
         }
 
@@ -151,21 +152,23 @@ namespace XOutput
             }
             Array.Resize(ref devices, deviceCount);
 
-            int isXBCDDevice = 0;
-			
+            int skip = 0;
+
             foreach (var deviceInstance in directInput.GetDevices(DeviceClass.GameController, DeviceEnumerationFlags.AttachedOnly))
             {
                 Joystick joystick = new Joystick(directInput, deviceInstance.InstanceGuid);
-				
-				if( isXBCDDevice == 0 ) {
-					isXBCDDevice += 1;
-				} else {
-					if (joystick.Information.ProductGuid.ToString() == "028e045e-0000-0000-0000-504944564944") //If its an emulated controller skip it
-					continue;
-				}
+
+                if (joystick.Information.ProductGuid.ToString() == "028e045e-0000-0000-0000-504944564944") //If its an emulated controller skip it
+                {
+                    skip++;
+                    continue;
+                }
 
                 if (joystick.Capabilities.ButtonCount < 1 && joystick.Capabilities.AxesCount < 1) //Skip if it doesn't have any button and axes
+                {
+                    skip++;
                     continue;
+                }
 
                 int spot = -1;
                 for (int i = 0; i < deviceCount; i++)
@@ -175,12 +178,12 @@ namespace XOutput
                         if (spot == -1)
                         {
                             spot = i;
-                            Console.WriteLine("Open Spot " + i.ToString());
+                            Console.WriteLine("Slot {0} is empty.", i);
                         }
                     }
                     else if (devices[i] != null && devices[i].joystick.Information.InstanceGuid == deviceInstance.InstanceGuid) //If the device is already initialized skip it
                     {
-                        Console.WriteLine("Controller Already Acquired " + i.ToString() + " " + deviceInstance.InstanceName);
+                        Console.WriteLine("Device {0} in Slot {1} already aquired. ", deviceInstance.InstanceName, i);
                         spot = -1;
                         break;
                     }
@@ -201,7 +204,8 @@ namespace XOutput
                 joystick.Acquire();
 
                 devices[spot] = new ControllerDevice(joystick, spot + 1);
-                if (IsActive)
+                Console.WriteLine("Device {0} assigned to slot {1}.", devices[spot].joystick.Information.InstanceName, spot);
+                /*if (IsActive)       //wieso is das nötig?
                 {
                     processingData[spot] = new ContData();
                     Console.WriteLine("Plug " + spot);
@@ -210,8 +214,9 @@ namespace XOutput
                     workers[spot] = new Thread(() =>
                     { ProcessData(t); });
                     workers[spot].Start();
-                }
+                }*/
             }
+            Console.WriteLine("Skipped {0} devices.", skip);
             return devices;
         }
 
