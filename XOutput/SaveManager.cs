@@ -108,7 +108,7 @@ namespace XOutput
             File.WriteAllText(path, generateSaveString(mapping));
         }
 
-        private static string generateSaveString(byte[] Mapping) {
+        private static string generateSaveString(byte[] Mapping) {  //convert byte array from ControllerOptions to save string
             string[] typeString = new string[] { "btn{0}", "{1}axis{0}", "dpad{0}{2}" };
             string[] axesString = new string[] { "", "i", "h", "ih" };
             string[] dpadString = new string[] { "up", "down", "left", "right" };

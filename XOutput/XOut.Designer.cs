@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XOut));
             this.StartStopBtn = new System.Windows.Forms.Button();
             this.isExclusive = new System.Windows.Forms.CheckBox();
             this.controllerList = new System.Windows.Forms.CheckedListBox();
             this.settingsLabel = new System.Windows.Forms.LinkLabel();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // StartStopBtn
@@ -77,6 +79,12 @@
             this.settingsLabel.Text = "Control Panel";
             this.settingsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.settingsLabel_LinkClicked);
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "XOutput";
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
             // XOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,6 +102,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XOut_Closing);
             this.Load += new System.EventHandler(this.XOut_Load);
             this.Shown += new System.EventHandler(this.XOut_Shown);
+            this.Resize += new System.EventHandler(this.XOut_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,5 +120,6 @@
         private System.Windows.Forms.CheckBox isExclusive;
         private System.Windows.Forms.CheckedListBox controllerList;
         private System.Windows.Forms.LinkLabel settingsLabel;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
