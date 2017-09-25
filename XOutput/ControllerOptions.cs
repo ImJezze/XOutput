@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace XOutput
@@ -12,7 +14,8 @@ namespace XOutput
         {
             InitializeComponent();
             dev = device;
-            this.Text = (dev.name + " (" + dev.joystick.Information.ProductGuid + ")");
+            this.Text = (dev.name + " (" + dev.joystick.Information.InstanceGuid + ")");
+            hintLabel.Text = "";
             int ind = 0;
 
             foreach (MultiLevelComboBox m in this.Controls.OfType<MultiLevelComboBox>()) {
@@ -59,7 +62,9 @@ namespace XOutput
                 //m.SelectionChangeCommitted += new System.EventHandler(SelectionChanged);
                 m.SelectionChangeCommitted += (sender, e) => SelectionChanged(sender, e, m);
                 m.KeyPress += (sender, e) => comboBoxKeyPress(sender, e);
-                m.MouseUp += (sender, e) => comboBox_MouseUp(sender, e); 
+                m.MouseUp += (sender, e) => comboBox_MouseUp(sender, e);
+                m.MouseEnter += (sender, e) => showHint(sender, e);
+                m.MouseLeave += (sender, e) => hideHint(sender, e);
                 ind++;
             }
         }
@@ -79,6 +84,8 @@ namespace XOutput
         }
 
         private byte[] detectInput(byte index) {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             SlimDX.DirectInput.JoystickState devState = dev.joystick.GetCurrentState();
             bool input = false;
             byte[] inputByte = new byte[] { (byte)0, (byte)0, (byte)0 };
@@ -157,10 +164,14 @@ namespace XOutput
                     }
                     k++;
                 }
+
+                if (sw.ElapsedMilliseconds > 2000 )
+                {
+                    inputByte[0] = 127; //this type defines an unsuccessful detection
+                    inputByte[2] = index;
+                    break;
+                }
             }
-            dev.mapping[inputByte[2] * 2] = inputByte[0];
-            dev.mapping[(inputByte[2] * 2) + 1] = inputByte[1];
-            dev.Save();
             return inputByte;
         }
 
@@ -169,8 +180,7 @@ namespace XOutput
             byte[] b = (byte[])i.Tag;   //store selection tag in array (b[0] = type, b[1] = number, b[2] = index
             if (b[0] == 254)
             {
-                m.Items[0] = "Input...";
-                BeginInvoke(new Action(() => assignDetectedInput(b[2], m)));
+                assignDetectedInput(b[2], m);
             } else
             {
                 dev.mapping[b[2] * 2] = b[0];
@@ -185,23 +195,38 @@ namespace XOutput
             if (e.Button == MouseButtons.Right)
             {
                 byte ind = (byte)(int)m.Tag;
-                //byte[] b = new byte[3];
-                //byte[] b = detectInput(ind);
-                m.Items[0] = "Input...";
-                BeginInvoke(new Action(() => assignDetectedInput(ind, m)));
-                //m.Items[0] = getBindingText(b[2]);
+                assignDetectedInput(ind, m);
             }
         }
 
-        private void assignDetectedInput(byte i, MultiLevelComboBox m)
+        private async void assignDetectedInput(byte i, MultiLevelComboBox m)    //really neccessary? might remove
         {
-            byte[] b = detectInput(i);
+            this.Enabled = false;
+            m.Items[0] = "Input...";
+            byte[] b = await Task.Run( () => detectInput(i) );  //run actual detection asynchronous
+            if (b[0] != 127)
+            {
+                dev.mapping[b[2] * 2] = b[0];
+                dev.mapping[(b[2] * 2) + 1] = b[1];
+                dev.Save();
+            }
             m.Items[0] = getBindingText(b[2]);
+            this.Enabled = true;
         }
 
         private void comboBoxKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;   //prevents the dropdown lists from being edited
+        }
+
+        private void showHint(object sender, EventArgs e)
+        {
+            hintLabel.Text = "Right-click to autodetect input.";
+        }
+
+        private void hideHint(object sender, EventArgs e)
+        {
+            hintLabel.Text = "";
         }
 
         private void onClose(object sender, EventArgs e) {

@@ -35,6 +35,7 @@
             this.controllerList = new System.Windows.Forms.CheckedListBox();
             this.settingsLabel = new System.Windows.Forms.LinkLabel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tipLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StartStopBtn
@@ -66,6 +67,8 @@
             this.controllerList.Name = "controllerList";
             this.controllerList.Size = new System.Drawing.Size(460, 289);
             this.controllerList.TabIndex = 10;
+            this.controllerList.MouseEnter += new System.EventHandler(this.controllerList_MouseEnter);
+            this.controllerList.MouseLeave += new System.EventHandler(this.controllerList_MouseLeave);
             this.controllerList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.controllerList_MouseUp);
             // 
             // settingsLabel
@@ -85,11 +88,23 @@
             this.notifyIcon.Text = "XOutput";
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
             // 
+            // tipLabel
+            // 
+            this.tipLabel.AutoSize = true;
+            this.tipLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.tipLabel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.tipLabel.Location = new System.Drawing.Point(170, 320);
+            this.tipLabel.Name = "tipLabel";
+            this.tipLabel.Size = new System.Drawing.Size(44, 13);
+            this.tipLabel.TabIndex = 12;
+            this.tipLabel.Text = "tipLabel";
+            // 
             // XOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 361);
+            this.ClientSize = new System.Drawing.Size(484, 355);
+            this.Controls.Add(this.tipLabel);
             this.Controls.Add(this.settingsLabel);
             this.Controls.Add(this.controllerList);
             this.Controls.Add(this.isExclusive);
@@ -121,5 +136,6 @@
         private System.Windows.Forms.CheckedListBox controllerList;
         private System.Windows.Forms.LinkLabel settingsLabel;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.Label tipLabel;
     }
 }
