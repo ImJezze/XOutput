@@ -1,9 +1,4 @@
 XOutput is a simple DirectInput to XInput wrapper made in C#. It uses the SCPDriver has a backend.
-This version has been fixed in order to support XBCD controllers, however currently there is support for only one controller
-
-Setup in XBCD must go like this:
-
-![alt tag](https://raw.githubusercontent.com/joao678/XOutput/master/setup.png)
 
 # Building
 
