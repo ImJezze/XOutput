@@ -103,7 +103,7 @@ namespace XOutput
             }
             string path = dirName + "\\" + devGUID + ".ini";
             if (!File.Exists(path)) {
-                File.Create(path);
+                File.Create(path).Close();
             }
             File.WriteAllText(path, generateSaveString(mapping));
         }

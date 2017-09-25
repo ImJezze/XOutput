@@ -37,7 +37,7 @@ namespace XOutput
             {
                 mapping[i] = 255; //Changed default mapping to blank
             }
-            byte[] saveData = SaveManager.Load(joy.Information.ProductGuid.ToString());
+            byte[] saveData = SaveManager.Load(joy.Information.InstanceGuid.ToString());
             if (saveData != null)
                 mapping = saveData;
         }
@@ -46,7 +46,7 @@ namespace XOutput
 
         public void Save()
         {
-            SaveManager.Save(joystick.Information.ProductGuid.ToString(), mapping);
+            SaveManager.Save(joystick.Information.InstanceGuid.ToString(), mapping);
         }
 
         private int[] GetAxes(JoystickState jstate)

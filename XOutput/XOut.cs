@@ -10,6 +10,7 @@ namespace XOutput
         public XOut()
         {
             InitializeComponent();
+            tipLabel.Text = "";
             this.controllerList.ItemCheck += (sender, e) => enabledChanged(e.Index, e.NewValue);
         }
 
@@ -29,18 +30,13 @@ namespace XOutput
             {
                 controllerManager.Stop();
             }
+            notifyIcon.Visible = false;
         }
 
         private void StartStopBtn_Click(object sender, EventArgs e)
         {
             if (StartStopBtn.Text == "Start")
             {
-                if (optionsWindow != null)
-                {
-                    System.Media.SystemSounds.Asterisk.Play();
-                    optionsWindow.Focus();
-                    return;
-                }
                 if (controllerManager.Start())
                 {
                     StartStopBtn.Text = "Stop";
@@ -75,7 +71,7 @@ namespace XOutput
                     {
                         controllerList.Items.RemoveAt(i);
                     }
-                    controllerList.Items.Insert(i, (i + 1).ToString() + ": " + dev[i].name);
+                    controllerList.Items.Insert(i, (i + 1).ToString() + ": " + dev[i].name + " (" + dev[i].joystick.Information.InstanceGuid + ")");
                     controllerList.SetItemChecked(i, dev[i].enabled);
                 }
                 else
@@ -112,18 +108,10 @@ namespace XOutput
         {
             if (i >= 0)
             {
-                if (optionsWindow == null)
-                {
-                    optionsWindow = new ControllerOptions(controllerManager.getController(i));
-                    optionsWindow.Show();
-                    optionsWindow.Activate();
-                    optionsWindow.FormClosed += (sender, e) => { optionsWindow = null; };
-                }
-                else
-                {
-                    System.Media.SystemSounds.Asterisk.Play();
-                    optionsWindow.Focus();
-                }
+                optionsWindow = new ControllerOptions(controllerManager.getController(i));
+                optionsWindow.ShowDialog();
+                optionsWindow.Activate();
+                optionsWindow.FormClosed += (sender, e) => { optionsWindow = null; };
             }
         }
 
@@ -179,6 +167,16 @@ namespace XOutput
         private void settingsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("control", "joy.cpl");
+        }
+
+        private void controllerList_MouseEnter(object sender, EventArgs e)
+        {
+            tipLabel.Text = "Right-click for options.";
+        }
+
+        private void controllerList_MouseLeave(object sender, EventArgs e)
+        {
+            tipLabel.Text = "";
         }
     }
 }

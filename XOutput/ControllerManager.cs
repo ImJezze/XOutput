@@ -158,7 +158,7 @@ namespace XOutput
             {
                 Joystick joystick = new Joystick(directInput, deviceInstance.InstanceGuid);
 
-                if (joystick.Information.ProductGuid.ToString() == "028e045e-0000-0000-0000-504944564944") //If its an emulated controller skip it
+                if (joystick.Information.InstanceGuid.ToString() == "028e045e-0000-0000-0000-504944564944") //If its an emulated controller skip it
                 {
                     skip++;
                     continue;

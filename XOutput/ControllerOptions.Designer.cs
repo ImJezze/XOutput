@@ -70,6 +70,7 @@
             this.dropLX = new XOutput.MultiLevelComboBox();
             this.dropRY = new XOutput.MultiLevelComboBox();
             this.dropRX = new XOutput.MultiLevelComboBox();
+            this.hintLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelA
@@ -312,6 +313,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropA.Location = new System.Drawing.Point(482, 290);
             this.dropA.Name = "dropA";
@@ -323,6 +325,7 @@
             this.dropB.FormattingEnabled = true;
             this.dropB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropB.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -342,6 +345,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropX.Location = new System.Drawing.Point(482, 390);
             this.dropX.Name = "dropX";
@@ -353,6 +357,7 @@
             this.dropY.FormattingEnabled = true;
             this.dropY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropY.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -372,6 +377,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropUp.Location = new System.Drawing.Point(40, 290);
             this.dropUp.Name = "dropUp";
@@ -383,6 +389,7 @@
             this.dropDown.FormattingEnabled = true;
             this.dropDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropDown.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -402,6 +409,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropLeft.Location = new System.Drawing.Point(40, 390);
             this.dropLeft.Name = "dropLeft";
@@ -413,6 +421,7 @@
             this.dropRight.FormattingEnabled = true;
             this.dropRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropRight.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -432,6 +441,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropLT.Location = new System.Drawing.Point(40, 40);
             this.dropLT.Name = "dropLT";
@@ -443,6 +453,7 @@
             this.dropRT.FormattingEnabled = true;
             this.dropRT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropRT.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -462,6 +473,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropLB.Location = new System.Drawing.Point(40, 90);
             this.dropLB.Name = "dropLB";
@@ -477,6 +489,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropRB.Location = new System.Drawing.Point(482, 90);
             this.dropRB.Name = "dropRB";
@@ -488,6 +501,7 @@
             this.dropLA.FormattingEnabled = true;
             this.dropLA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropLA.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -508,6 +522,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropRA.Location = new System.Drawing.Point(482, 140);
             this.dropRA.Name = "dropRA";
@@ -519,6 +534,7 @@
             this.dropHome.FormattingEnabled = true;
             this.dropHome.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropHome.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -538,6 +554,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropStart.Location = new System.Drawing.Point(482, 490);
             this.dropStart.Name = "dropStart";
@@ -549,6 +566,7 @@
             this.dropBack.FormattingEnabled = true;
             this.dropBack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropBack.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -568,6 +586,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropLY.Location = new System.Drawing.Point(40, 240);
             this.dropLY.Name = "dropLY";
@@ -579,6 +598,7 @@
             this.dropLX.FormattingEnabled = true;
             this.dropLX.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dropLX.Items.AddRange(new object[] {
+            "",
             "",
             "",
             "",
@@ -598,6 +618,7 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropRY.Location = new System.Drawing.Point(482, 240);
             this.dropRY.Name = "dropRY";
@@ -613,17 +634,29 @@
             "",
             "",
             "",
+            "",
             ""});
             this.dropRX.Location = new System.Drawing.Point(482, 190);
             this.dropRX.Name = "dropRX";
             this.dropRX.Size = new System.Drawing.Size(121, 21);
             this.dropRX.TabIndex = 34;
             // 
+            // hintLabel
+            // 
+            this.hintLabel.AutoSize = true;
+            this.hintLabel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.hintLabel.Location = new System.Drawing.Point(40, 536);
+            this.hintLabel.Name = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(50, 13);
+            this.hintLabel.TabIndex = 44;
+            this.hintLabel.Text = "hintLabel";
+            // 
             // ControllerOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 561);
+            this.Controls.Add(this.hintLabel);
             this.Controls.Add(this.labelRY);
             this.Controls.Add(this.labelLY);
             this.Controls.Add(this.labelRX);
@@ -721,6 +754,6 @@
         private System.Windows.Forms.Label labelRX;
         private System.Windows.Forms.Label labelLY;
         private System.Windows.Forms.Label labelRY;
-
+        private System.Windows.Forms.Label hintLabel;
     }
 }
