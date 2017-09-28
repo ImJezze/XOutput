@@ -88,7 +88,7 @@ namespace XOutput
             sw.Start();
             SlimDX.DirectInput.JoystickState devState = dev.joystick.GetCurrentState();
             bool input = false;
-            byte[] inputByte = new byte[] { (byte)0, (byte)0, (byte)0 };
+            byte[] b = new byte[] { (byte)0, (byte)0, (byte)0 };
 
             int[] axisNeutral = new int[] { devState.X, devState.Y, devState.Z, devState.RotationX, devState.RotationY, devState.RotationZ }; //gets the current axis positions and assumes them as neutral
             while (!input)
@@ -104,10 +104,11 @@ namespace XOutput
                     if (buttons[n])
                     {
                         input = true;
-                        inputByte[0] = 0;
-                        inputByte[1] = (byte)n;
-                        inputByte[2] = index;
-                        Console.WriteLine("Binding button {0} to index {1}", n + 1, inputByte[2]);
+                        b[0] = 0;
+                        b[1] = (byte)n;
+                        b[2] = index;
+                        Console.WriteLine("Binding button {0} to index {1}", n + 1, b[2]);
+                        return b;
                     }
                     n++;
                 }
@@ -118,10 +119,11 @@ namespace XOutput
                     if (axis[j] > axisNeutral[j] + 15000 || axis[j] < axisNeutral[j] - 15000)   //adding a deadzone, just to make sure user really presses the right direction
                     {
                         input = true;
-                        inputByte[0] = 16;
-                        inputByte[1] = (byte)j;
-                        inputByte[2] = index;
-                        Console.WriteLine("Binding axis {0} to index {1}", j + 1, inputByte[2]);
+                        b[0] = 16;
+                        b[1] = (byte)j;
+                        b[2] = index;
+                        Console.WriteLine("Binding axis {0} to index {1}", j + 1, b[2]);
+                        return b;
                     }
                     j++;
                 }
@@ -134,32 +136,32 @@ namespace XOutput
                         {
                             case 0:
                                 input = true;
-                                inputByte[0] = 32;
-                                inputByte[1] = (byte)k;
-                                inputByte[2] = index;
-                                Console.WriteLine("Binding DPad Up {0} to index {1}", k + 1, inputByte[2]);
-                                break;
+                                b[0] = 32;
+                                b[1] = (byte)k;
+                                b[2] = index;
+                                Console.WriteLine("Binding DPad Up {0} to index {1}", k + 1, b[2]);
+                                return b;
                             case 9000:
                                 input = true;
-                                inputByte[0] = 35;
-                                inputByte[1] = (byte)k;
-                                inputByte[2] = index;
-                                Console.WriteLine("Binding DPad Right {0} to index {1}", k + 1, inputByte[2]);
-                                break;
+                                b[0] = 35;
+                                b[1] = (byte)k;
+                                b[2] = index;
+                                Console.WriteLine("Binding DPad Right {0} to index {1}", k + 1, b[2]);
+                                return b;
                             case 18000:
                                 input = true;
-                                inputByte[0] = 33;
-                                inputByte[1] = (byte)k;
-                                inputByte[2] = index;
-                                Console.WriteLine("Binding DPad Down {0} to index {1}", k + 1, inputByte[2]);
-                                break;
+                                b[0] = 33;
+                                b[1] = (byte)k;
+                                b[2] = index;
+                                Console.WriteLine("Binding DPad Down {0} to index {1}", k + 1, b[2]);
+                                return b;
                             case 27000:
                                 input = true;
-                                inputByte[0] = 34;
-                                inputByte[1] = (byte)k;
-                                inputByte[2] = index;
-                                Console.WriteLine("Binding DPad Left {0} to index {1}", k + 1, inputByte[2]);
-                                break;
+                                b[0] = 34;
+                                b[1] = (byte)k;
+                                b[2] = index;
+                                Console.WriteLine("Binding DPad Left {0} to index {1}", k + 1, b[2]);
+                                return b;
                         }
                     }
                     k++;
@@ -167,12 +169,12 @@ namespace XOutput
 
                 if (sw.ElapsedMilliseconds > 2000 )
                 {
-                    inputByte[0] = 127; //this type defines an unsuccessful detection
-                    inputByte[2] = index;
+                    b[0] = 127; //this type defines an unsuccessful detection
+                    b[2] = index;
                     break;
                 }
             }
-            return inputByte;
+            return b;
         }
 
         private void SelectionChanged(object sender, EventArgs e, MultiLevelComboBox m) {
@@ -204,7 +206,7 @@ namespace XOutput
             this.Enabled = false;
             m.Items[0] = "Input...";
             byte[] b = await Task.Run( () => detectInput(i) );  //run actual detection asynchronous
-            if (b[0] != 127)
+            if (b[0] != 127)    //detectInput returns b[0] = 127 if no input was made
             {
                 dev.mapping[b[2] * 2] = b[0];
                 dev.mapping[(b[2] * 2) + 1] = b[1];

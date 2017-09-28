@@ -54,7 +54,7 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>XOutput_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\XOutput_Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
@@ -167,7 +167,10 @@
     <None Include="Resources\gear.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="XOutput_Icon.ico" />
+    <None Include="Resources\activeIcon.bmp" />
+    <None Include="Resources\XOutput_Icon.ico" />
+    <None Include="Resources\XOutput_Icon-Inactive.ico" />
+    <Content Include="Resources\XOutput_Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

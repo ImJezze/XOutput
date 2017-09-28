@@ -19,6 +19,7 @@ namespace XOutput
         private DirectInput directInput;
         private ControllerDevice[] devices;
         public int deviceCount = 0;
+        public int pluggedDevices = 0;
         public bool running = false;
         private Thread[] workers = new Thread[4];
         public const String BUS_CLASS_GUID = "{F679F562-3164-42CE-A4DB-E7DDBE723909}";
@@ -42,29 +43,6 @@ namespace XOutput
         }
 
         #region Utility Functions
-
-        public void changeExclusive(bool e)
-        {
-            isExclusive = e;
-            for (int i = 0; i < deviceCount; i++)
-            {
-                if (devices[i] != null)
-                {
-                    if (isExclusive)
-                    {
-                        devices[i].joystick.Unacquire();
-                        devices[i].joystick.SetCooperativeLevel(handle, CooperativeLevel.Exclusive | CooperativeLevel.Background);
-                        devices[i].joystick.Acquire();
-                    }
-                    else
-                    {
-                        devices[i].joystick.Unacquire();
-                        devices[i].joystick.SetCooperativeLevel(handle, CooperativeLevel.Nonexclusive | CooperativeLevel.Background);
-                        devices[i].joystick.Acquire();
-                    }
-                }
-            }
-        }
 
         public ControllerDevice getController(int n)
         {
@@ -110,7 +88,7 @@ namespace XOutput
 
         public override bool Start()
         {
-            Console.WriteLine(Process.GetCurrentProcess().MainWindowHandle);
+            //Console.WriteLine(Process.GetCurrentProcess().MainWindowHandle);
             Open();
             detectControllers();
 
@@ -120,12 +98,20 @@ namespace XOutput
                 {
                     //running = true;
                     processingData[i] = new ContData();
-                    Console.WriteLine("Plugged in device at slot {0}. ", i);
                     Plugin(i + 1);
+                    Console.WriteLine("Plugged in device {0} at slot {1}. ", devices[i].name, i);
                     int t = i;
                     workers[i] = new Thread(() =>
                     { ProcessData(t); });
                     workers[i].Start();
+
+                    if (isExclusive)
+                    {
+                        devices[i].joystick.Unacquire();
+                        devices[i].joystick.SetCooperativeLevel(handle, CooperativeLevel.Exclusive | CooperativeLevel.Background);
+                        devices[i].joystick.Acquire();
+                        Console.WriteLine("Device {0}'s cooperative level set to exclusive.", devices[i].joystick.Information.InstanceName);
+                    }
                 }
             }
 
@@ -192,20 +178,13 @@ namespace XOutput
                 if (spot == -1)
                     continue;
 
-                if (isExclusive)
-                {
-                    joystick.SetCooperativeLevel(handle, CooperativeLevel.Exclusive | CooperativeLevel.Background);
-                }
-                else
-                {
-                    joystick.SetCooperativeLevel(handle, CooperativeLevel.Nonexclusive | CooperativeLevel.Background);
-                }
+                devices[spot] = new ControllerDevice(joystick, spot + 1);
+                Console.WriteLine("Device {0} assigned to slot {1}.", devices[spot].name, spot);
+
                 joystick.Properties.BufferSize = 128;
                 joystick.Acquire();
 
-                devices[spot] = new ControllerDevice(joystick, spot + 1);
-                Console.WriteLine("Device {0} assigned to slot {1}.", devices[spot].joystick.Information.InstanceName, spot);
-                /*if (IsActive)       //wieso is das nötig?
+                /*if (IsActive)       // seems unnecessary
                 {
                     processingData[spot] = new ContData();
                     Console.WriteLine("Plug " + spot);
@@ -216,7 +195,7 @@ namespace XOutput
                     workers[spot].Start();
                 }*/
             }
-            Console.WriteLine("Skipped {0} devices.", skip);
+            Console.WriteLine("Skipped {0} device(s).", skip);
             return devices;
         }
 
@@ -237,10 +216,15 @@ namespace XOutput
                 {
                     if (devices[i] != null && devices[i].enabled)
                     {
-                        Console.WriteLine(i);
                         workers[i].Abort();
                         workers[i] = null;
                         Unplug(i + 1);
+                        Console.WriteLine("Unplugged device {0} at slot {1}. ", devices[i].name, i);
+
+                        devices[i].joystick.Unacquire();
+                        devices[i].joystick.SetCooperativeLevel(handle, CooperativeLevel.Nonexclusive | CooperativeLevel.Background);
+                        devices[i].joystick.Acquire();
+                        Console.WriteLine("Device {0}'s cooperative level set to non-exclusive.", devices[i].joystick.Information.InstanceName);
                     }
                 }
 
@@ -266,6 +250,8 @@ namespace XOutput
                 Buffer[6] = (Byte)((Serial >> 16) & 0xFF);
                 Buffer[7] = (Byte)((Serial >> 24) & 0xFF);
 
+                pluggedDevices++;
+
                 return DeviceIoControl(m_FileHandle, 0x2A4000, Buffer, Buffer.Length, null, 0, ref Transfered, IntPtr.Zero);
             }
 
@@ -289,12 +275,14 @@ namespace XOutput
                 Buffer[6] = (Byte)((Serial >> 16) & 0xFF);
                 Buffer[7] = (Byte)((Serial >> 24) & 0xFF);
 
+                pluggedDevices--;
+
                 return DeviceIoControl(m_FileHandle, 0x2A4004, Buffer, Buffer.Length, null, 0, ref Transfered, IntPtr.Zero);
             }
             return false;
         }
 
-        private void ProcessData(int n)
+        private void ProcessData(int n) //process input and send to XInput device
         {
             while (IsActive)
             {
@@ -310,10 +298,10 @@ namespace XOutput
                     {
 
                         data[0] = (byte)n;
-                        Parse(data, processingData[n].parsedData);
+                        Parse(data, processingData[n].parsedData);  //input to output
                         Report(processingData[n].parsedData, processingData[n].output);
                     }
-                    Thread.Sleep(1);
+                    Thread.Sleep(1);    //basically the polling rate
                 }
             }
         }
@@ -325,9 +313,9 @@ namespace XOutput
                 Int32 Transfered = 0;
 
 
-                bool result = DeviceIoControl(m_FileHandle, 0x2A400C, Input, Input.Length, Output, Output.Length, ref Transfered, IntPtr.Zero) && Transfered > 0;
+                bool result = DeviceIoControl(m_FileHandle, 0x2A400C, Input, Input.Length, Output, Output.Length, ref Transfered, IntPtr.Zero) && Transfered > 0;   //send the actual data to the XInput device
                 int deviceInd = Input[4] - 1;
-                return result;
+                return true;
 
             }
             return false;

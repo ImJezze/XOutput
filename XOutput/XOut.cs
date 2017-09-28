@@ -40,11 +40,10 @@ namespace XOutput
                 if (controllerManager.Start())
                 {
                     StartStopBtn.Text = "Stop";
-                    for (int i = 0; i < 4; i++)
-                    {
-                        controllerList.Enabled = false;
-                        isExclusive.Enabled = false;
-                    }
+                    controllerList.Enabled = false;
+                    isExclusive.Enabled = false;
+                    notifyIcon.Text = ("XOutput\nEmulating " + controllerManager.pluggedDevices + " device(s).");
+                    notifyIcon.Icon = Properties.Resources.AppIcon;
                 }
             }
             else
@@ -52,11 +51,10 @@ namespace XOutput
                 if (controllerManager.Stop())
                 {
                     StartStopBtn.Text = "Start";
-                    for (int i = 0; i < controllerManager.deviceCount; i++)
-                    {
-                        controllerList.Enabled = true;
-                        isExclusive.Enabled = true;
-                    }
+                    controllerList.Enabled = true;
+                    isExclusive.Enabled = true;
+                    notifyIcon.Text = ("XOutput");
+                    notifyIcon.Icon = Properties.Resources.AppIconInactive;
                 }
             }
         }
@@ -151,7 +149,7 @@ namespace XOutput
 
         private void isExclusive_CheckedChanged(object sender, EventArgs e)
         {
-            controllerManager.changeExclusive(!controllerManager.isExclusive);
+            controllerManager.isExclusive = !controllerManager.isExclusive;
         }
 
         private void controllerList_MouseUp(object sender, MouseEventArgs e)
