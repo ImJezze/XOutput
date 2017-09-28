@@ -1,6 +1,7 @@
 ﻿using SlimDX.DirectInput;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace XOutput
 {
@@ -59,9 +60,14 @@ namespace XOutput
             }
         }
 
-        private void UpdateInfo(ControllerDevice[] dev)
+        private void UpdateInfo(List<ControllerDevice> dev)
         {
-            for (int i = 0; i < controllerManager.deviceCount; i++)
+            if (controllerList.Items.Count > dev.Count)
+            {
+                for (int i = 0; i < (controllerList.Items.Count - dev.Count); i++) controllerList.Items.RemoveAt(controllerList.Items.Count - 1 + i);
+            }
+
+            for (int i = 0; i < dev.Count; i++)
             {
                 if (dev[i] != null)
                 {
