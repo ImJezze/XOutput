@@ -196,7 +196,7 @@ namespace XOutput
             Report[10] = (byte)(
                 ((cOutput.Back ? 1 : 0) << 0) |
                 ((cOutput.L3 ? 1 : 0) << 1) |
-                ((cOutput.R3 ? 1 : 0) << 2) |
+                ((cOutput.R3 ? 1 : 0) << 2) | 
                 ((cOutput.Start ? 1 : 0) << 3) |
                 ((cOutput.DpadUp ? 1 : 0) << 4) |
                 ((cOutput.DpadRight ? 1 : 0) << 5) |

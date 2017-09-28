@@ -3,6 +3,8 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace XOutput
@@ -17,11 +19,13 @@ namespace XOutput
         }
 
         private DirectInput directInput;
-        private ControllerDevice[] devices;
+        //private ControllerDevice[] devices;
+        private List<ControllerDevice> devices;
         public int deviceCount = 0;
         public int pluggedDevices = 0;
         public bool running = false;
-        private Thread[] workers = new Thread[4];
+        //private Thread[] workers = new Thread[4];
+        private List<Thread> workers = new List<Thread>();
         public const String BUS_CLASS_GUID = "{F679F562-3164-42CE-A4DB-E7DDBE723909}";
         private ContData[] processingData = new ContData[4];
         private Control handle;
@@ -34,7 +38,8 @@ namespace XOutput
             : base(BUS_CLASS_GUID)
         {
             directInput = new DirectInput();
-            devices = new ControllerDevice[1];
+            //devices = new ControllerDevice[1];
+            devices = new List<ControllerDevice>();
             handle = _handle;
             ds4locks[0] = new object();
             ds4locks[1] = new object();
@@ -101,8 +106,8 @@ namespace XOutput
                     Plugin(i + 1);
                     Console.WriteLine("Plugged in device {0} at slot {1}. ", devices[i].name, i);
                     int t = i;
-                    workers[i] = new Thread(() =>
-                    { ProcessData(t); });
+                    workers.Add(new Thread(() =>
+                    { ProcessData(t); }));
                     workers[i].Start();
 
                     if (isExclusive)
@@ -119,24 +124,39 @@ namespace XOutput
             return running;
         }
 
-        public ControllerDevice[] detectControllers()
+        public void Resize<T>(ref List<T> list, int size)
+        {
+            int cur = list.Count;
+            if (size < cur) list.RemoveRange(size, cur - size);
+            else if (size > cur)
+            {
+                list.Capacity = size;
+                list.AddRange(Enumerable.Repeat(default(T), size - cur));
+            }
+        }
+
+        public List<ControllerDevice> detectControllers()
         {
             deviceCount = getDeviceCount()[0];
             int allDeviceCount = getDeviceCount()[1];
             Console.WriteLine("Detected {0} attached controllers out of {1} controllers in total.", deviceCount, allDeviceCount);
-            Array.Resize(ref devices, allDeviceCount);
-            for (int i = 0; i < allDeviceCount; i++) //Remove disconnected controllers
+
+            for (int i = 0; i < devices.Count(); i++) //Remove disconnected controllers
             {
                 if (devices[i] != null && !directInput.IsDeviceAttached(devices[i].joystick.Information.InstanceGuid))
                 {
                     Console.WriteLine("{0} removed.", devices[i].joystick.Properties.InstanceName);
                     devices[i] = null;
-                    workers[i].Abort();
-                    workers[i] = null;
-                    Unplug(i + 1);
+                    if (i < workers.Count())
+                    {
+                        workers[i].Abort();
+                        workers[i] = null;
+                        Unplug(i + 1);
+                    }
                 }
             }
-            Array.Resize(ref devices, deviceCount);
+
+            Resize(ref devices, deviceCount);
 
             int skip = 0;
 
@@ -212,12 +232,11 @@ namespace XOutput
             if (running)
             {
                 running = false;
-                for (int i = 0; i < deviceCount; i++)
+                for (int i = 0; i < workers.Count; i++)
                 {
-                    if (devices[i] != null && devices[i].enabled)
+                    if (workers[i] != null)
                     {
                         workers[i].Abort();
-                        workers[i] = null;
                         Unplug(i + 1);
                         Console.WriteLine("Unplugged device {0} at slot {1}. ", devices[i].name, i);
 
@@ -227,7 +246,8 @@ namespace XOutput
                         Console.WriteLine("Device {0}'s cooperative level set to non-exclusive.", devices[i].joystick.Information.InstanceName);
                     }
                 }
-
+                workers.Clear();
+                workers.Capacity = 0;
             }
             deviceCount = getDeviceCount()[0];
             return base.Stop();
