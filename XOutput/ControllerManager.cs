@@ -19,32 +19,25 @@ namespace XOutput
         }
 
         private DirectInput directInput;
-        //private ControllerDevice[] devices;
         private List<ControllerDevice> devices;
         public int deviceCount = 0;
         public int pluggedDevices = 0;
         public bool running = false;
-        //private Thread[] workers = new Thread[4];
         private List<Thread> workers = new List<Thread>();
         public const String BUS_CLASS_GUID = "{F679F562-3164-42CE-A4DB-E7DDBE723909}";
-        private ContData[] processingData = new ContData[4];
+        private List<ContData> processingData = new List<ContData>();
         private Control handle;
         public bool isExclusive = false;
 
-
-        private object[] ds4locks = new object[4];
+        private List<object> ds4locks = new List<object>();
 
         public ControllerManager(Control _handle)
             : base(BUS_CLASS_GUID)
         {
             directInput = new DirectInput();
-            //devices = new ControllerDevice[1];
             devices = new List<ControllerDevice>();
             handle = _handle;
-            ds4locks[0] = new object();
-            ds4locks[1] = new object();
-            ds4locks[2] = new object();
-            ds4locks[3] = new object();
+            ds4locks = new List<object>();
         }
 
         #region Utility Functions
@@ -102,7 +95,10 @@ namespace XOutput
                 if (devices[i] != null && devices[i].enabled)
                 {
                     //running = true;
+                    Resize(ref processingData, i + 1);
                     processingData[i] = new ContData();
+                    Resize(ref ds4locks, i + 1);
+                    ds4locks[i] = new object();
                     Plugin(i + 1);
                     Console.WriteLine("Plugged in device {0} at slot {1}. ", devices[i].name, i);
                     int t = i;
