@@ -38,7 +38,7 @@ namespace XOutput
                 mapping[i] = 255; //Changed default mapping to blank
             }
             byte[] saveData = SaveManager.Load(joy.Information.InstanceGuid.ToString());
-            if (saveData != null)
+            if (saveData != null)   //if there's already a mapping saved, apply it (else, the default mapping is kept)
                 mapping = saveData;
         }
 
@@ -65,15 +65,15 @@ namespace XOutput
             int i = dPads[n];
             switch (i)
             {
-                case -1: b[0] = false; b[1] = false; b[2] = false; b[3] = false; break;
-                case 0: b[0] = true; b[1] = false; b[2] = false; b[3] = false; break;
-                case 4500: b[0] = true; b[1] = false; b[2] = false; b[3] = true; break;
-                case 9000: b[0] = false; b[1] = false; b[2] = false; b[3] = true; break;
-                case 13500: b[0] = false; b[1] = true; b[2] = false; b[3] = true; break;
-                case 18000: b[0] = false; b[1] = true; b[2] = false; b[3] = false; break;
-                case 22500: b[0] = false; b[1] = true; b[2] = true; b[3] = false; break;
-                case 27000: b[0] = false; b[1] = false; b[2] = true; b[3] = false; break;
-                case 31500: b[0] = true; b[1] = false; b[2] = true; b[3] = false; break;
+                case -1: b[0] = false; b[1] = false; b[2] = false; b[3] = false; break;     //none
+                case 0: b[0] = true; b[1] = false; b[2] = false; b[3] = false; break;       //up
+                case 4500: b[0] = true; b[1] = false; b[2] = false; b[3] = true; break;     //right-up
+                case 9000: b[0] = false; b[1] = false; b[2] = false; b[3] = true; break;    //right
+                case 13500: b[0] = false; b[1] = true; b[2] = false; b[3] = true; break;    //right-down
+                case 18000: b[0] = false; b[1] = true; b[2] = false; b[3] = false; break;   //down
+                case 22500: b[0] = false; b[1] = true; b[2] = true; b[3] = false; break;    //left-down
+                case 27000: b[0] = false; b[1] = false; b[2] = true; b[3] = false; break;   //left
+                case 31500: b[0] = true; b[1] = false; b[2] = true; b[3] = false; break;    //left-up
             }
             return b;
         }
@@ -89,8 +89,8 @@ namespace XOutput
 
         byte Button(byte subType, byte num)
         {
-            int i = (int)toByte(buttons[num]) * 255;
-            return (byte)i;
+            int i = (int)toByte(buttons[num]) * 255;    //if button num is pressed, buttons[num] will be true
+            return (byte)i;     //returns 255, if button num is pressed
         }
 
         byte Analog(byte subType, byte num)
@@ -136,10 +136,10 @@ namespace XOutput
             dPads = jState.GetPointOfViewControllers();
             analogs = GetAxes(jState);
 
-            input funcButton = Button;
-            input funcAnalog = Analog;
+            input funcButton = Button;  //assigns a function that checks, whether a button is pressed to the delegate funcButton
+            input funcAnalog = Analog;  //same for Analog and DPad
             input funcDPad = DPad;
-            input[] funcArray = new input[] { funcButton, funcAnalog, funcDPad };
+            input[] funcArray = new input[] { funcButton, funcAnalog, funcDPad };   //assigns the delegates to an array
 
             byte[] output = new byte[21];
             for (int i = 0; i < 21; i++)
@@ -151,10 +151,10 @@ namespace XOutput
                 byte subtype = (byte)(mapping[i * 2] & 0x0F);
                 byte type = (byte)((mapping[i * 2] & 0xF0) >> 4);
                 byte num = mapping[(i * 2) + 1];
-                output[i] = funcArray[type](subtype, num);
+                output[i] = funcArray[type](subtype, num);  //does the actual check, what value control num of type and subtype has
             }
 
-            cOutput.A = output[0] != 0;
+            cOutput.A = output[0] != 0; //for buttons, the cOutput will be either true or false
             cOutput.B = output[1] != 0;
             cOutput.X = output[2] != 0;
             cOutput.Y = output[3] != 0;
@@ -164,7 +164,7 @@ namespace XOutput
             cOutput.DpadLeft = output[6] != 0;
             cOutput.DpadRight = output[7] != 0;
 
-            cOutput.L2 = output[9];
+            cOutput.L2 = output[9]; //for axes, the cOutput will be the actual value
             cOutput.R2 = output[8];
 
             cOutput.L1 = output[10] != 0;
