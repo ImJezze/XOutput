@@ -86,7 +86,6 @@ namespace XOutput
 
         public override bool Start()
         {
-            //Console.WriteLine(Process.GetCurrentProcess().MainWindowHandle);
             Open();
             detectControllers();
 
@@ -94,16 +93,17 @@ namespace XOutput
             {
                 if (devices[i] != null && devices[i].enabled)
                 {
-                    //running = true;
                     Resize(ref processingData, i + 1);
-                    processingData[i] = new ContData();
                     Resize(ref ds4locks, i + 1);
+                    Resize(ref workers, i + 1);
+
+                    processingData[i] = new ContData();
                     ds4locks[i] = new object();
                     Plugin(i + 1);
                     Console.WriteLine("Plugged in device {0} at slot {1}. ", devices[i].name, i);
                     int t = i;
-                    workers.Add(new Thread(() =>
-                    { ProcessData(t); }));
+                    workers[i] = new Thread(() =>
+                    { ProcessData(t); });
                     workers[i].Start();
 
                     if (isExclusive)

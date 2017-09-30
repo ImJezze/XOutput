@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace XOutput
 {
@@ -216,6 +217,18 @@ namespace XOutput
             this.Enabled = true;
         }
 
+        private void resetProfile()
+        {
+            foreach (MultiLevelComboBox m in this.Controls.OfType<MultiLevelComboBox>())
+            {
+                byte[] b = { 255, 0, (byte)(int)m.Tag };
+                dev.mapping[b[2] * 2] = b[0];
+                dev.mapping[(b[2] * 2) + 1] = b[1];
+                dev.Save();
+                m.Items[0] = getBindingText(b[2]);
+            }
+        }
+
         private void comboBoxKeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;   //prevents the dropdown lists from being edited
@@ -235,5 +248,12 @@ namespace XOutput
             dev.Save();
         }
 
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ALL settings in this profile will be lost. Are you sure?", "Reset Profile", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                resetProfile();
+            }
+        }
     }
 }
