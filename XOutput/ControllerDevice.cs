@@ -20,9 +20,10 @@ namespace XOutput
 
         public OutputState cOutput;
         public byte[] mapping = new byte[42];
-        bool[] buttons;
-        int[] dPads;
-        int[] analogs;
+        public bool[] buttons;
+        public int[] dPads;
+        public int[] analogs;
+        public int[] sliders;
 
 
         delegate byte input(byte subType, byte num);
@@ -32,6 +33,16 @@ namespace XOutput
             joystick = joy;
             deviceNumber = num;
             name = joystick.Information.InstanceName;
+
+            joystick.Acquire();
+            joystick.Poll();
+            JoystickState jState = joystick.GetCurrentState();
+            joystick.Unacquire();
+            //buttons = jState.GetButtons();
+            //dPads = jState.GetPointOfViewControllers();
+            analogs = GetAxes(jState);
+            sliders = jState.GetSliders();
+
             cOutput = new OutputState();
             for (int i = 0; i < 42; i++)
             {
@@ -93,7 +104,7 @@ namespace XOutput
             return (byte)i;     //returns 255, if button num is pressed
         }
 
-        byte Analog(byte subType, byte num)
+        byte Analog(byte subType, byte num) //returns value between 0 and 255 (could be more accurate?)
         {
             int p = analogs[num];
             switch (subType)
@@ -126,6 +137,33 @@ namespace XOutput
             return (byte)i;
         }
 
+        byte Slider(byte subType, byte num)
+        {
+            int p = sliders[num];
+            switch (subType)
+            {
+                case 0: //Normal
+                    return (byte)(p / 256);
+                case 1: //Inverted
+                    return (byte)((65535 - p) / 256);
+                case 2: //Half
+                    int m = (p - 32767) / 129;
+                    if (m < 0)
+                    {
+                        m = 0;
+                    }
+                    return (byte)m;
+                case 3: //Inverted Half
+                    m = (p - 32767) / 129;
+                    if (-m < 0)
+                    {
+                        m = 0;
+                    }
+                    return (byte)-m;
+            }
+            return 0;
+        }
+
         #endregion
 
         private void updateInput()
@@ -135,18 +173,22 @@ namespace XOutput
             buttons = jState.GetButtons();
             dPads = jState.GetPointOfViewControllers();
             analogs = GetAxes(jState);
+            sliders = jState.GetSliders();
 
             input funcButton = Button;  //assigns a function that checks, whether a button is pressed to the delegate funcButton
-            input funcAnalog = Analog;  //same for Analog and DPad
+            input funcAnalog = Analog;  //same for Analog, DPad and Slider
             input funcDPad = DPad;
-            input[] funcArray = new input[] { funcButton, funcAnalog, funcDPad };   //assigns the delegates to an array
+            input funcSlider = Slider;
+
+            input[] funcArray = new input[] { funcButton, funcAnalog, funcDPad, funcSlider };   //assigns the delegates to an array
 
             byte[] output = new byte[21];
             for (int i = 0; i < 21; i++)
             {
                 if (mapping[i * 2] == 255)
                 {
-                    continue;
+                    if ( i <= 16 ) continue;
+                    else { output[i] = 127; continue; } //fixes axis stuck in top left corner
                 }
                 byte subtype = (byte)(mapping[i * 2] & 0x0F);
                 byte type = (byte)((mapping[i * 2] & 0xF0) >> 4);

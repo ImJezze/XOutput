@@ -62,6 +62,29 @@ namespace XOutput
                     subType = 3;
                     num = byte.Parse(val.Remove(val.Length - 5));
                 }
+            } else if (val.Contains("slider"))
+            {
+                type = 3;
+                if (val.StartsWith("ih"))
+                {
+                    num = byte.Parse(val.Remove(0, 8));
+                    subType = 3;
+                }
+                else if (val.StartsWith("h"))
+                {
+                    subType = 2;
+                    num = byte.Parse(val.Remove(0, 7));
+                }
+                else if (val.StartsWith("i"))
+                {
+                    subType = 1;
+                    num = byte.Parse(val.Remove(0, 7));
+                }
+                else
+                {
+                    subType = 0;
+                    num = byte.Parse(val.Remove(0, 6));
+                }
             } else if (val == "disabled") {
             } else {
                 Logger.Log("Error parsing: Could not identify value");
@@ -109,7 +132,7 @@ namespace XOutput
         }
 
         private static string generateSaveString(byte[] Mapping) {  //convert byte array from ControllerOptions to save string
-            string[] typeString = new string[] { "btn{0}", "{1}axis{0}", "dpad{0}{2}" };
+            string[] typeString = new string[] { "btn{0}", "{1}axis{0}", "dpad{0}{2}", "{1}slider{0}" };
             string[] axesString = new string[] { "", "i", "h", "ih" };
             string[] dpadString = new string[] { "up", "down", "left", "right" };
 

@@ -36,9 +36,9 @@ namespace XOutput
                 for (int i = 1; i <= dev.joystick.Capabilities.ButtonCount; i++)
                 {
                     m.addOption("Button " + i.ToString(), buttons,
-                        new byte[] { 0, (byte)(i - 1), (byte)ind });    //example: type 0 (button), number i - 1 (number of button), ind index
-                }
-                for (int i = 1; i <= dev.joystick.Capabilities.PovCount; i++)
+                        new byte[] { 0, (byte)(i - 1), (byte)ind });            //example: type 0 (button), subtype i - 1 (number of button), ind index
+                }                                                               //since the types start with powers of two, the four leftmost bytes contain the main type
+                for (int i = 1; i <= dev.joystick.Capabilities.PovCount; i++)   //the four rightmost types then contain the subtype which is (type - maintype)
                 {
                     m.addOption("D-Pad " + i.ToString() + " Up", dpads,
                         new byte[] { 32, (byte)(i - 1), (byte)ind });
@@ -49,16 +49,33 @@ namespace XOutput
                     m.addOption("D-Pad " + i.ToString() + " Right", dpads,
                         new byte[] { 35, (byte)(i - 1), (byte)ind });
                 }
-                for (int i = 1; i <= dev.joystick.Capabilities.AxesCount; i++)
+                for (int i = 1; i <= dev.analogs.Length; i++)
                 {
-                    m.addOption("Axis " + i.ToString(), axes,
-                        new byte[] { 16, (byte)(i - 1), (byte)ind });
-                    m.addOption("IAxis " + i.ToString(), iaxes,
-                        new byte[] { 17, (byte)(i - 1), (byte)ind });
-                    m.addOption("HAxis" + i.ToString(), haxes,
-                        new byte[] { 18, (byte)(i - 1), (byte)ind });
-                    m.addOption("IHAxis" + i.ToString(), ihaxes,
-                        new byte[] { 19, (byte)(i - 1), (byte)ind });
+                    if (dev.analogs[i - 1] != 0)
+                    {
+                        m.addOption("Axis " + i.ToString(), axes,
+                            new byte[] { 16, (byte)(i - 1), (byte)ind });
+                        m.addOption("IAxis " + i.ToString(), iaxes,
+                            new byte[] { 17, (byte)(i - 1), (byte)ind });
+                        m.addOption("HAxis " + i.ToString(), haxes,
+                            new byte[] { 18, (byte)(i - 1), (byte)ind });
+                        m.addOption("IHAxis " + i.ToString(), ihaxes,
+                            new byte[] { 19, (byte)(i - 1), (byte)ind });
+                    }
+                }
+                for (int i = 1; i <= dev.sliders.Length; i++)   //placeholder
+                {
+                    if (dev.sliders[i - 1] != 0)
+                    {
+                        m.addOption("Slider " + i.ToString(), axes,
+                            new byte[] { 48, (byte)(i - 1), (byte)ind });
+                        m.addOption("ISlider " + i.ToString(), iaxes,
+                            new byte[] { 49, (byte)(i - 1), (byte)ind });
+                        m.addOption("HSlider " + i.ToString(), haxes,
+                            new byte[] { 50, (byte)(i - 1), (byte)ind });
+                        m.addOption("IHSlider " + i.ToString(), ihaxes,
+                            new byte[] { 51, (byte)(i - 1), (byte)ind });
+                    }
                 }
                 //m.SelectionChangeCommitted += new System.EventHandler(SelectionChanged);
                 m.SelectionChangeCommitted += (sender, e) => SelectionChanged(sender, e, m);
@@ -75,10 +92,10 @@ namespace XOutput
             if (dev.mapping[i * 2] == 255) {
                 return "Disabled";
             }
-            byte subType = (byte)(dev.mapping[i * 2] & 0x0F);
-            byte type = (byte)((dev.mapping[i * 2] & 0xF0) >> 4);
+            byte subType = (byte)(dev.mapping[i * 2] & 0x0F);   //0F are the four rightmost bits
+            byte type = (byte)((dev.mapping[i * 2] & 0xF0) >> 4);   //F0 are the four leftmost bits (this line takes the four leftmost bits and assigns them to the four rightmost bits)
             byte num = (byte)(dev.mapping[(i * 2) + 1] + 1);
-            string[] typeString = new string[] { "Button {0}", "{1}Axis {0}", "D-Pad {0} {2}" };
+            string[] typeString = new string[] { "Button {0}", "{1}Axis {0}", "D-Pad {0} {2}", "{1}Slider {0}" };
             string[] axesString = new string[] { "", "I", "H", "IH" };
             string[] dpadString = new string[] { "Up", "Down", "Left", "Right" };
             return string.Format(typeString[type], num, axesString[subType], dpadString[subType]);
@@ -87,85 +104,104 @@ namespace XOutput
         private byte[] detectInput(byte index) {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            SlimDX.DirectInput.JoystickState devState = dev.joystick.GetCurrentState();
+            SlimDX.DirectInput.JoystickState jState = dev.joystick.GetCurrentState();
             bool input = false;
             byte[] b = new byte[] { (byte)0, (byte)0, (byte)0 };
 
-            int[] axisNeutral = new int[] { devState.X, devState.Y, devState.Z, devState.RotationX, devState.RotationY, devState.RotationZ }; //gets the current axis positions and assumes them as neutral
+            int[] axisNeutral = new int[] { jState.X, jState.Y, jState.Z, jState.RotationX, jState.RotationY, jState.RotationZ }; //gets the current axis positions and assumes them as neutral
+            int[] slidersNeutral = new int[] { jState.GetSliders()[0], jState.GetSliders()[1] };
+
             while (!input)
             {
-                devState = dev.joystick.GetCurrentState();
-                bool[] buttons = devState.GetButtons(); //return bool for every button as array
-                int[] pov = devState.GetPointOfViewControllers();  //returns int for every pov position as array
-                int[] axis = new int[] { devState.X, devState.Y, devState.Z, devState.RotationX, devState.RotationY, devState.RotationZ }; //returns int for every slider position as array
+                jState = dev.joystick.GetCurrentState();
+                bool[] buttons = jState.GetButtons(); //return bool for every button as array
+                int[] pov = jState.GetPointOfViewControllers();  //returns int for every pov position as array
+                int[] axis = new int[] { jState.X, jState.Y, jState.Z, jState.RotationX, jState.RotationY, jState.RotationZ }; //returns int for every slider position as array
+                int[] sliders = new int[] { jState.GetSliders()[0], jState.GetSliders()[1] };
 
-                int n = 0;
-                while (n < buttons.Length && !input)
+                int i;
+                i = 0;
+                while (i < buttons.Length && !input)
                 {
-                    if (buttons[n])
+                    if (buttons[i])
                     {
                         input = true;
                         b[0] = 0;
-                        b[1] = (byte)n;
+                        b[1] = (byte)i;
                         b[2] = index;
-                        Console.WriteLine("Binding button {0} to index {1}", n + 1, b[2]);
+                        Console.WriteLine("Binding button {0} to index {1}", i + 1, b[2]);
                         return b;
                     }
-                    n++;
+                    i++;
                 }
 
-                int j = 0;
-                while (j < axis.Length && !input)
+                i = 0;
+                while (i < axis.Length && !input)
                 {
-                    if (axis[j] > axisNeutral[j] + 15000 || axis[j] < axisNeutral[j] - 15000)   //adding a deadzone, just to make sure user really presses the right direction
+                    if (axis[i] > axisNeutral[i] + 15000 || axis[i] < axisNeutral[i] - 15000)   //adding a deadzone, just to make sure user really presses the right direction
                     {
                         input = true;
                         b[0] = 16;
-                        b[1] = (byte)j;
+                        b[1] = (byte)i;
                         b[2] = index;
-                        Console.WriteLine("Binding axis {0} to index {1}", j + 1, b[2]);
+                        Console.WriteLine("Binding axis {0} to index {1}", i + 1, b[2]);
                         return b;
                     }
-                    j++;
+                    i++;
                 }
 
-                int k = 0;
-                while (k < pov.Length && !input)
+                i = 0;
+                while (i < sliders.Length && !input)
+                {
+                    if (sliders[i] > slidersNeutral[i] + 15000 || sliders[i] < slidersNeutral[i] - 15000)
+                    {
+                        input = true;
+                        b[0] = 48;
+                        b[1] = (byte)i;
+                        b[2] = index;
+                        Console.WriteLine("Binding slider {0} to index {1}", i + 1, b[2]);
+                        return b;
+                    }
+                    i++;
+                }
+
+                i = 0;
+                while (i < pov.Length && !input)
                 {
                     {
-                        switch(pov[k])
+                        switch(pov[i])
                         {
                             case 0:
                                 input = true;
                                 b[0] = 32;
-                                b[1] = (byte)k;
+                                b[1] = (byte)i;
                                 b[2] = index;
-                                Console.WriteLine("Binding DPad Up {0} to index {1}", k + 1, b[2]);
+                                Console.WriteLine("Binding DPad Up {0} to index {1}", i + 1, b[2]);
                                 return b;
                             case 9000:
                                 input = true;
                                 b[0] = 35;
-                                b[1] = (byte)k;
+                                b[1] = (byte)i;
                                 b[2] = index;
-                                Console.WriteLine("Binding DPad Right {0} to index {1}", k + 1, b[2]);
+                                Console.WriteLine("Binding DPad Right {0} to index {1}", i + 1, b[2]);
                                 return b;
                             case 18000:
                                 input = true;
                                 b[0] = 33;
-                                b[1] = (byte)k;
+                                b[1] = (byte)i;
                                 b[2] = index;
-                                Console.WriteLine("Binding DPad Down {0} to index {1}", k + 1, b[2]);
+                                Console.WriteLine("Binding DPad Down {0} to index {1}", i + 1, b[2]);
                                 return b;
                             case 27000:
                                 input = true;
                                 b[0] = 34;
-                                b[1] = (byte)k;
+                                b[1] = (byte)i;
                                 b[2] = index;
-                                Console.WriteLine("Binding DPad Left {0} to index {1}", k + 1, b[2]);
+                                Console.WriteLine("Binding DPad Left {0} to index {1}", i + 1, b[2]);
                                 return b;
                         }
                     }
-                    k++;
+                    i++;
                 }
 
                 if (sw.ElapsedMilliseconds > 2000 )
@@ -186,8 +222,8 @@ namespace XOutput
                 assignDetectedInput(b[2], m);
             } else
             {
-                dev.mapping[b[2] * 2] = b[0];
-                dev.mapping[(b[2] * 2) + 1] = b[1];
+                dev.mapping[b[2] * 2] = b[0];           //type and subtype are stored at every even number
+                dev.mapping[(b[2] * 2) + 1] = b[1];     //number of the control is stored at every uneven number above the corresponding even number
                 dev.Save();
             }
         }
