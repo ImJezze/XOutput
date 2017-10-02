@@ -4,20 +4,20 @@ using System.IO;
 namespace XOutput
 {
     static class SaveManager {
-        static string[] properties = new string[] {"button_a", "button_b", "button_x", "button_y",
+        static string[] properties = new string[] {"button_a", "button_b", "button_x", "button_y", "home", "start", "back",
             "dpad_up", "dpad_down", "dpad_left", "dpad_right",
-            "left_trigger", "right_trigger", "left_bumper", "right_bumper", "left_axebutton", "right_axebutton",
-            "home", "start", "back", "left_y", "left_x", "right_y", "right_x"};
+            "left_trigger", "right_trigger", "left_bumper", "right_bumper",
+            "left_axebutton", "left_y_up", "left_y_down", "left_x_up", "left_x_down", "right_axebutton", "right_y_up", "right_y_down", "right_x_up", "right_x_down"};
         static private string dirName = @"configs";
 
         private static byte[] parseLine(string line) { //This needs better error hadnling
             int i; //The index of the control in the map array
             byte type = 255, subType = 255, num = 255;
-            for (i = 0; i < 21; i++) { //find which button this is for
+            for (i = 0; i < 24; i++) { //find which button this is for
                 if (line.StartsWith(properties[i])) {
                     break;
                 }
-                if (i == 20) {
+                if (i == 24) {
                     Logger.Log("Error parsing: Could not identify property");
                     return new byte[] { 255, 255, 255};
                 }
@@ -33,18 +33,12 @@ namespace XOutput
                 num = byte.Parse(val.Remove(0, 3));
             } else if (val.Contains("axis")) {
                 type = 1;
-                if (val.StartsWith("ih")) {
-                    num = byte.Parse(val.Remove(0, 6));
-                    subType = 3;
-                } else if (val.StartsWith("h")) {
-                    subType = 2;
-                    num = byte.Parse(val.Remove(0, 5));
-                } else if (val.StartsWith("i")) {
+                if (val.StartsWith("-")) {
                     subType = 1;
                     num = byte.Parse(val.Remove(0, 5));
                 } else {
                     subType = 0;
-                    num = byte.Parse(val.Remove(0, 4));
+                    num = byte.Parse(val.Remove(0, 5));
                 }
             } else if (val.StartsWith("dpad")) {
                 type = 2;
@@ -65,17 +59,7 @@ namespace XOutput
             } else if (val.Contains("slider"))
             {
                 type = 3;
-                if (val.StartsWith("ih"))
-                {
-                    num = byte.Parse(val.Remove(0, 8));
-                    subType = 3;
-                }
-                else if (val.StartsWith("h"))
-                {
-                    subType = 2;
-                    num = byte.Parse(val.Remove(0, 7));
-                }
-                else if (val.StartsWith("i"))
+                if (val.StartsWith("-"))
                 {
                     subType = 1;
                     num = byte.Parse(val.Remove(0, 7));
@@ -83,7 +67,7 @@ namespace XOutput
                 else
                 {
                     subType = 0;
-                    num = byte.Parse(val.Remove(0, 6));
+                    num = byte.Parse(val.Remove(0, 7));
                 }
             } else if (val == "disabled") {
             } else {
@@ -106,12 +90,12 @@ namespace XOutput
 
                 return null;
             }
-            byte[] mapping = new byte[42];
+            byte[] mapping = new byte[50];
             string[] config = File.ReadAllLines(path);
             for (int i = 0; i < config.Length; i++) {
                 byte[] data = parseLine(config[i]);
                 Console.Write(data[0]);
-                if (data[0] > 40) {
+                if (data[0] > 48) {
                     continue;
                 }
                 mapping[data[0]] = data[1];
@@ -133,16 +117,17 @@ namespace XOutput
 
         private static string generateSaveString(byte[] Mapping) {  //convert byte array from ControllerOptions to save string
             string[] typeString = new string[] { "btn{0}", "{1}axis{0}", "dpad{0}{2}", "{1}slider{0}" };
-            string[] axesString = new string[] { "", "i", "h", "ih" };
+            string[] axesString = new string[] { "+", "-" };
             string[] dpadString = new string[] { "up", "down", "left", "right" };
 
             string saveString = "";
-            for (int i = 0; i < 21; i++) {
+            for (int i = 0; i < 25; i++) {
                 saveString += properties[i] + "=";
                 if (Mapping[i * 2] == 255) {
                     saveString += "disabled\r\n";
                     continue;
                 }
+                Console.WriteLine(Mapping[i * 2]);
                 byte subType = (byte)(Mapping[i * 2] & 0x0F);
                 byte type = (byte)((Mapping[i * 2] & 0xF0) >> 4);
                 byte num = (byte)(Mapping[i * 2 + 1] + 1);
