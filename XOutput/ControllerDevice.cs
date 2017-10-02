@@ -19,7 +19,7 @@ namespace XOutput
         public bool enabled = true;
 
         public OutputState cOutput;
-        public byte[] mapping = new byte[42];
+        public byte[] mapping = new byte[50];
         public bool[] buttons;
         public int[] dPads;
         public int[] analogs;
@@ -44,7 +44,7 @@ namespace XOutput
             sliders = jState.GetSliders();
 
             cOutput = new OutputState();
-            for (int i = 0; i < 42; i++)
+            for (int i = 0; i < 50; i++)
             {
                 mapping[i] = 255; //Changed default mapping to blank
             }
@@ -100,28 +100,25 @@ namespace XOutput
 
         byte Button(byte subType, byte num)
         {
-            int i = (int)toByte(buttons[num]) * 255;    //if button num is pressed, buttons[num] will be true
+            int i = (int)toByte(buttons[num]) * 127;    //if button num is pressed, buttons[num] will be true
             return (byte)i;     //returns 255, if button num is pressed
         }
 
-        byte Analog(byte subType, byte num) //returns value between 0 and 255 (could be more accurate?)
+        byte Analog(byte subType, byte num) //returns value between 0 and 127 (could be more accurate?)
         {
             int p = analogs[num];
+            int m;
             switch (subType)
             {
-                case 0: //Normal
-                    return (byte)(p / 256);
-                case 1: //Inverted
-                    return (byte)((65535 - p) / 256);
-                case 2: //Half
-                    int m = (p - 32767) / 129;
+                case 0: //Normal +
+                    m = (p - 32767) / 258;
                     if (m < 0)
                     {
                         m = 0;
                     }
                     return (byte)m;
-                case 3: //Inverted Half
-                    m = (p - 32767) / 129;
+                case 1: //Normal -
+                    m = (p - 32767) / 258;
                     if (-m < 0)
                     {
                         m = 0;
@@ -133,28 +130,25 @@ namespace XOutput
 
         byte DPad(byte subType, byte num)
         {
-            int i = (int)toByte(getPov(num)[subType]) * 255;
+            int i = (int)toByte(getPov(num)[subType]) * 127;
             return (byte)i;
         }
 
         byte Slider(byte subType, byte num)
         {
             int p = sliders[num];
+            int m;
             switch (subType)
             {
-                case 0: //Normal
-                    return (byte)(p / 256);
-                case 1: //Inverted
-                    return (byte)((65535 - p) / 256);
-                case 2: //Half
-                    int m = (p - 32767) / 129;
+                case 0: //Normal +
+                    m = (p - 32767) / 258;
                     if (m < 0)
                     {
                         m = 0;
                     }
                     return (byte)m;
-                case 3: //Inverted Half
-                    m = (p - 32767) / 129;
+                case 1: //Normal -
+                    m = (p - 32767) / 258;
                     if (-m < 0)
                     {
                         m = 0;
@@ -182,13 +176,12 @@ namespace XOutput
 
             input[] funcArray = new input[] { funcButton, funcAnalog, funcDPad, funcSlider };   //assigns the delegates to an array
 
-            byte[] output = new byte[21];
-            for (int i = 0; i < 21; i++)
+            byte[] output = new byte[25];
+            for (int i = 0; i < 25; i++)
             {
                 if (mapping[i * 2] == 255)
                 {
-                    if ( i <= 16 ) continue;
-                    else { output[i] = 127; continue; } //fixes axis stuck in top left corner
+                    continue;
                 }
                 byte subtype = (byte)(mapping[i * 2] & 0x0F);
                 byte type = (byte)((mapping[i * 2] & 0xF0) >> 4);
@@ -201,29 +194,36 @@ namespace XOutput
             cOutput.X = output[2] != 0;
             cOutput.Y = output[3] != 0;
 
-            cOutput.DpadUp = output[4] != 0;
-            cOutput.DpadDown = output[5] != 0;
-            cOutput.DpadLeft = output[6] != 0;
-            cOutput.DpadRight = output[7] != 0;
+            cOutput.Home = output[4] != 0;
+            cOutput.Start = output[5] != 0;
+            cOutput.Back = output[6] != 0;
 
-            cOutput.L2 = output[9]; //for axes, the cOutput will be the actual value
-            cOutput.R2 = output[8];
+            cOutput.DpadUp = output[7] != 0;
+            cOutput.DpadDown = output[8] != 0;
+            cOutput.DpadLeft = output[9] != 0;
+            cOutput.DpadRight = output[10] != 0;
 
-            cOutput.L1 = output[10] != 0;
-            cOutput.R1 = output[11] != 0;
+            cOutput.L2 = (byte)(output[12] * 2); //for axes, the cOutput will be the actual value
+            cOutput.R2 = (byte)(output[11] * 2);
 
-            cOutput.L3 = output[12] != 0;
-            cOutput.R3 = output[13] != 0;
+            cOutput.L1 = output[13] != 0;
+            cOutput.R1 = output[14] != 0;
 
-            cOutput.Home = output[14] != 0;
-            cOutput.Start = output[15] != 0;
-            cOutput.Back = output[16] != 0;
+            cOutput.L3 = output[15] != 0;
+            cOutput.R3 = output[20] != 0;
 
+            /*
             cOutput.LY = output[17];
             cOutput.LX = output[18];
             cOutput.RY = output[19];
             cOutput.RX = output[20];
-            
+            */
+
+            // experimental for up/down options
+            cOutput.LY = (byte)(127 + output[17] - output[16]); //inverted since up is - axis
+            cOutput.LX = (byte)(127 + output[18] - output[19]);
+            cOutput.RY = (byte)(127 + output[22] - output[21]);
+            cOutput.RX = (byte)(127 + output[23] - output[24]);            
         }
 
 

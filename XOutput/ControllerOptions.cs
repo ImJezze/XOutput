@@ -19,71 +19,65 @@ namespace XOutput
             hintLabel.Text = "";
             int ind = 0;
 
-            foreach (MultiLevelComboBox m in this.Controls.OfType<MultiLevelComboBox>()) {
-                //Tag structure: [Type, Number, Index]
-                m.Items[0] = getBindingText(ind); //Change combobox text according to saved binding
-                m.Tag = ind;
-                m.addOption("Disabled",
-                    tag: new byte[] { 255, 0, (byte)ind });
-                m.addOption("Detect",
-                    tag: new byte[] { 254, 0, (byte)ind });
-                ToolStripMenuItem axes = m.addMenu("Axes");
-                ToolStripMenuItem buttons = m.addMenu("Buttons");
-                ToolStripMenuItem dpads = m.addMenu("D-Pads");
-                ToolStripMenuItem iaxes = m.addMenu("Inverted Axes", axes);
-                ToolStripMenuItem haxes = m.addMenu("Half Axes", axes);
-                ToolStripMenuItem ihaxes = m.addMenu("Inverted Half Axes", axes);
-                for (int i = 1; i <= dev.joystick.Capabilities.ButtonCount; i++)
+            foreach (GroupBox g in this.Controls.OfType<GroupBox>().OrderBy(g => g.TabIndex))
+            {
+                foreach (MultiLevelComboBox m in g.Controls.OfType<MultiLevelComboBox>().OrderBy(m => m.TabIndex))
                 {
-                    m.addOption("Button " + i.ToString(), buttons,
-                        new byte[] { 0, (byte)(i - 1), (byte)ind });            //example: type 0 (button), subtype i - 1 (number of button), ind index
-                }                                                               //since the types start with powers of two, the four leftmost bytes contain the main type
-                for (int i = 1; i <= dev.joystick.Capabilities.PovCount; i++)   //the four rightmost types then contain the subtype which is (type - maintype)
-                {
-                    m.addOption("D-Pad " + i.ToString() + " Up", dpads,
-                        new byte[] { 32, (byte)(i - 1), (byte)ind });
-                    m.addOption("D-Pad " + i.ToString() + " Down", dpads,
-                        new byte[] { 33, (byte)(i - 1), (byte)ind });
-                    m.addOption("D-Pad " + i.ToString() + " Left", dpads,
-                        new byte[] { 34, (byte)(i - 1), (byte)ind });
-                    m.addOption("D-Pad " + i.ToString() + " Right", dpads,
-                        new byte[] { 35, (byte)(i - 1), (byte)ind });
-                }
-                for (int i = 1; i <= dev.analogs.Length; i++)
-                {
-                    if (dev.analogs[i - 1] != 0)
+                    //Tag structure: [Type, Number, Index]
+                    m.Items[0] = getBindingText(ind); //Change combobox text according to saved binding
+                    m.Tag = ind;
+                    m.addOption("Disabled",
+                        tag: new byte[] { 255, 0, (byte)ind });
+                    m.addOption("Detect",
+                        tag: new byte[] { 254, 0, (byte)ind });
+                    ToolStripMenuItem axes = m.addMenu("Axes");
+                    ToolStripMenuItem buttons = m.addMenu("Buttons");
+                    ToolStripMenuItem dpads = m.addMenu("D-Pads");
+                    ToolStripMenuItem incaxes = m.addMenu("+ Axes", axes);
+                    ToolStripMenuItem decaxes = m.addMenu("- Axes", axes);
+                    for (int i = 1; i <= dev.joystick.Capabilities.ButtonCount; i++)
                     {
-                        m.addOption("Axis " + i.ToString(), axes,
-                            new byte[] { 16, (byte)(i - 1), (byte)ind });
-                        m.addOption("IAxis " + i.ToString(), iaxes,
-                            new byte[] { 17, (byte)(i - 1), (byte)ind });
-                        m.addOption("HAxis " + i.ToString(), haxes,
-                            new byte[] { 18, (byte)(i - 1), (byte)ind });
-                        m.addOption("IHAxis " + i.ToString(), ihaxes,
-                            new byte[] { 19, (byte)(i - 1), (byte)ind });
-                    }
-                }
-                for (int i = 1; i <= dev.sliders.Length; i++)   //placeholder
-                {
-                    if (dev.sliders[i - 1] != 0)
+                        m.addOption("Button " + i.ToString(), buttons,
+                            new byte[] { 0, (byte)(i - 1), (byte)ind });            //example: type 0 (button), subtype i - 1 (number of button), ind index
+                    }                                                               //since the types start with powers of two, the four leftmost bytes contain the main type
+                    for (int i = 1; i <= dev.joystick.Capabilities.PovCount; i++)   //the four rightmost types then contain the subtype which is (type - maintype)
                     {
-                        m.addOption("Slider " + i.ToString(), axes,
-                            new byte[] { 48, (byte)(i - 1), (byte)ind });
-                        m.addOption("ISlider " + i.ToString(), iaxes,
-                            new byte[] { 49, (byte)(i - 1), (byte)ind });
-                        m.addOption("HSlider " + i.ToString(), haxes,
-                            new byte[] { 50, (byte)(i - 1), (byte)ind });
-                        m.addOption("IHSlider " + i.ToString(), ihaxes,
-                            new byte[] { 51, (byte)(i - 1), (byte)ind });
+                        m.addOption("D-Pad " + i.ToString() + " Up", dpads,
+                            new byte[] { 32, (byte)(i - 1), (byte)ind });
+                        m.addOption("D-Pad " + i.ToString() + " Down", dpads,
+                            new byte[] { 33, (byte)(i - 1), (byte)ind });
+                        m.addOption("D-Pad " + i.ToString() + " Left", dpads,
+                            new byte[] { 34, (byte)(i - 1), (byte)ind });
+                        m.addOption("D-Pad " + i.ToString() + " Right", dpads,
+                            new byte[] { 35, (byte)(i - 1), (byte)ind });
                     }
+                    for (int i = 1; i <= dev.analogs.Length; i++)
+                    {
+                        if (dev.analogs[i - 1] != 0)
+                        {
+                            m.addOption("+ Axis " + i.ToString(), incaxes,
+                                new byte[] { 16, (byte)(i - 1), (byte)ind });
+                            m.addOption("- Axis " + i.ToString(), decaxes,
+                                new byte[] { 17, (byte)(i - 1), (byte)ind });
+                        }
+                    }
+                    for (int i = 1; i <= dev.sliders.Length; i++)   //placeholder
+                    {
+                        if (dev.sliders[i - 1] != 0)
+                        {
+                            m.addOption("+ Slider " + i.ToString(), incaxes,
+                                new byte[] { 48, (byte)(i - 1), (byte)ind });
+                            m.addOption("- Slider " + i.ToString(), decaxes,
+                                new byte[] { 49, (byte)(i - 1), (byte)ind });
+                        }
+                    }
+                    m.SelectionChangeCommitted += (sender, e) => SelectionChanged(sender, e, m);
+                    m.KeyPress += (sender, e) => comboBoxKeyPress(sender, e);
+                    m.MouseUp += (sender, e) => comboBox_MouseUp(sender, e);
+                    m.MouseEnter += (sender, e) => showHint(sender, e);
+                    m.MouseLeave += (sender, e) => hideHint(sender, e);
+                    ind++;
                 }
-                //m.SelectionChangeCommitted += new System.EventHandler(SelectionChanged);
-                m.SelectionChangeCommitted += (sender, e) => SelectionChanged(sender, e, m);
-                m.KeyPress += (sender, e) => comboBoxKeyPress(sender, e);
-                m.MouseUp += (sender, e) => comboBox_MouseUp(sender, e);
-                m.MouseEnter += (sender, e) => showHint(sender, e);
-                m.MouseLeave += (sender, e) => hideHint(sender, e);
-                ind++;
             }
         }
 
@@ -96,7 +90,7 @@ namespace XOutput
             byte type = (byte)((dev.mapping[i * 2] & 0xF0) >> 4);   //F0 are the four leftmost bits (this line takes the four leftmost bits and assigns them to the four rightmost bits)
             byte num = (byte)(dev.mapping[(i * 2) + 1] + 1);
             string[] typeString = new string[] { "Button {0}", "{1}Axis {0}", "D-Pad {0} {2}", "{1}Slider {0}" };
-            string[] axesString = new string[] { "", "I", "H", "IH" };
+            string[] axesString = new string[] { "+ ", "- " };
             string[] dpadString = new string[] { "Up", "Down", "Left", "Right" };
             return string.Format(typeString[type], num, axesString[subType], dpadString[subType]);
         }
@@ -138,13 +132,21 @@ namespace XOutput
                 i = 0;
                 while (i < axis.Length && !input)
                 {
-                    if (axis[i] > axisNeutral[i] + 15000 || axis[i] < axisNeutral[i] - 15000)   //adding a deadzone, just to make sure user really presses the right direction
+                    if (axis[i] > axisNeutral[i] + 15000)   //adding a deadzone, just to make sure user really presses the right direction
                     {
                         input = true;
                         b[0] = 16;
                         b[1] = (byte)i;
                         b[2] = index;
-                        Console.WriteLine("Binding axis {0} to index {1}", i + 1, b[2]);
+                        Console.WriteLine("Binding + axis {0} to index {1}", i + 1, b[2]);
+                        return b;
+                    } else if (axis[i] < axisNeutral[i] - 15000) //adding a deadzone, just to make sure user really presses the right direction
+                    {   
+                        input = true;
+                        b[0] = 17;
+                        b[1] = (byte)i;
+                        b[2] = index;
+                        Console.WriteLine("Binding - axis {0} to index {1}", i + 1, b[2]);
                         return b;
                     }
                     i++;
@@ -153,13 +155,22 @@ namespace XOutput
                 i = 0;
                 while (i < sliders.Length && !input)
                 {
-                    if (sliders[i] > slidersNeutral[i] + 15000 || sliders[i] < slidersNeutral[i] - 15000)
+                    if (sliders[i] > slidersNeutral[i] + 15000)
                     {
                         input = true;
                         b[0] = 48;
                         b[1] = (byte)i;
                         b[2] = index;
-                        Console.WriteLine("Binding slider {0} to index {1}", i + 1, b[2]);
+                        Console.WriteLine("Binding + slider {0} to index {1}", i + 1, b[2]);
+                        return b;
+                    }
+                    else if (sliders[i] < slidersNeutral[i] - 15000)
+                    {
+                        input = true;
+                        b[0] = 49;
+                        b[1] = (byte)i;
+                        b[2] = index;
+                        Console.WriteLine("Binding - slider {0} to index {1}", i + 1, b[2]);
                         return b;
                     }
                     i++;
@@ -255,13 +266,16 @@ namespace XOutput
 
         private void resetProfile()
         {
-            foreach (MultiLevelComboBox m in this.Controls.OfType<MultiLevelComboBox>())
+            foreach (GroupBox g in this.Controls.OfType<GroupBox>().OrderBy(g => g.TabIndex))
             {
-                byte[] b = { 255, 0, (byte)(int)m.Tag };
-                dev.mapping[b[2] * 2] = b[0];
-                dev.mapping[(b[2] * 2) + 1] = b[1];
-                dev.Save();
-                m.Items[0] = getBindingText(b[2]);
+                foreach (MultiLevelComboBox m in g.Controls.OfType<MultiLevelComboBox>())
+                {
+                    byte[] b = { 255, 0, (byte)(int)m.Tag };
+                    dev.mapping[b[2] * 2] = b[0];
+                    dev.mapping[(b[2] * 2) + 1] = b[1];
+                    dev.Save();
+                    m.Items[0] = getBindingText(b[2]);
+                }
             }
         }
 
@@ -290,6 +304,11 @@ namespace XOutput
             {
                 resetProfile();
             }
+        }
+
+        private void ControllerOptions_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

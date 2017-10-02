@@ -53,7 +53,7 @@ namespace XOutput
             devices[i].enabled = b;
         }
 
-        private Int32 Scale(Int32 Value, Boolean Flip)
+        private Int32 Scale(Int32 Value, Boolean Flip)  //returns the actual value to be sent to the device
         {
             Value -= 0x80;
 
