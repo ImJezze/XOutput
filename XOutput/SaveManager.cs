@@ -117,7 +117,7 @@ namespace XOutput
 
         private static string generateSaveString(byte[] Mapping) {  //convert byte array from ControllerOptions to save string
             string[] typeString = new string[] { "btn{0}", "{1}axis{0}", "dpad{0}{2}", "{1}slider{0}" };
-            string[] axesString = new string[] { "+", "-" };
+            string[] axesString = new string[] { "+", "-", "", "" };
             string[] dpadString = new string[] { "up", "down", "left", "right" };
 
             string saveString = "";
@@ -131,6 +131,7 @@ namespace XOutput
                 byte subType = (byte)(Mapping[i * 2] & 0x0F);
                 byte type = (byte)((Mapping[i * 2] & 0xF0) >> 4);
                 byte num = (byte)(Mapping[i * 2 + 1] + 1);
+                Console.WriteLine(subType);
                 saveString += string.Format(typeString[type], num, axesString[subType], dpadString[subType]) + "\r\n";
             }
             return saveString;

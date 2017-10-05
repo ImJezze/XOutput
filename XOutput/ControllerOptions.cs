@@ -90,7 +90,7 @@ namespace XOutput
             byte type = (byte)((dev.mapping[i * 2] & 0xF0) >> 4);   //F0 are the four leftmost bits (this line takes the four leftmost bits and assigns them to the four rightmost bits)
             byte num = (byte)(dev.mapping[(i * 2) + 1] + 1);
             string[] typeString = new string[] { "Button {0}", "{1}Axis {0}", "D-Pad {0} {2}", "{1}Slider {0}" };
-            string[] axesString = new string[] { "+ ", "- " };
+            string[] axesString = new string[] { "+ ", "- ", "", "" };
             string[] dpadString = new string[] { "Up", "Down", "Left", "Right" };
             return string.Format(typeString[type], num, axesString[subType], dpadString[subType]);
         }
