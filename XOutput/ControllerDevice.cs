@@ -10,7 +10,7 @@ namespace XOutput
         public bool A, B, X, Y, Start, Back, L1, R1, L3, R3, Home;
         public bool DpadUp, DpadRight, DpadDown, DpadLeft;
     }
-    //test
+
     public class ControllerDevice
     {
         public Joystick joystick;
