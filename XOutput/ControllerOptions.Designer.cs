@@ -28,1167 +28,847 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelA = new System.Windows.Forms.Label();
-            this.labelB = new System.Windows.Forms.Label();
-            this.labelX = new System.Windows.Forms.Label();
-            this.labelY = new System.Windows.Forms.Label();
-            this.labelUp = new System.Windows.Forms.Label();
-            this.labelDown = new System.Windows.Forms.Label();
-            this.labelLeft = new System.Windows.Forms.Label();
-            this.labelRight = new System.Windows.Forms.Label();
-            this.labelRT = new System.Windows.Forms.Label();
-            this.labelLT = new System.Windows.Forms.Label();
-            this.labelRB = new System.Windows.Forms.Label();
-            this.labelLB = new System.Windows.Forms.Label();
-            this.labelBack = new System.Windows.Forms.Label();
-            this.labelStart = new System.Windows.Forms.Label();
-            this.labelHome = new System.Windows.Forms.Label();
-            this.labelRA = new System.Windows.Forms.Label();
-            this.labelLA = new System.Windows.Forms.Label();
-            this.labelLXUp = new System.Windows.Forms.Label();
-            this.labelRX = new System.Windows.Forms.Label();
-            this.labelLYUp = new System.Windows.Forms.Label();
-            this.labelRY = new System.Windows.Forms.Label();
+            this.labelButtonA = new System.Windows.Forms.Label();
+            this.labelButtonB = new System.Windows.Forms.Label();
+            this.labelButtonX = new System.Windows.Forms.Label();
+            this.labelButtonY = new System.Windows.Forms.Label();
+            this.labelDigitalUp = new System.Windows.Forms.Label();
+            this.labelDigitalDown = new System.Windows.Forms.Label();
+            this.labelDigitalLeft = new System.Windows.Forms.Label();
+            this.labelDigitalRight = new System.Windows.Forms.Label();
+            this.labelTriggerRight = new System.Windows.Forms.Label();
+            this.labelTriggerLeft = new System.Windows.Forms.Label();
+            this.labelBumperRight = new System.Windows.Forms.Label();
+            this.labelBumperLeft = new System.Windows.Forms.Label();
+            this.labelButtonBack = new System.Windows.Forms.Label();
+            this.labelButtonStart = new System.Windows.Forms.Label();
+            this.labelButtonHome = new System.Windows.Forms.Label();
+            this.labelAnalogRightButton = new System.Windows.Forms.Label();
+            this.labelAnalogLeftButton = new System.Windows.Forms.Label();
+            this.labelAnalogLeftXPositive = new System.Windows.Forms.Label();
+            this.labelAnalogRightXPositive = new System.Windows.Forms.Label();
+            this.labelAnalogLeftYPositive = new System.Windows.Forms.Label();
+            this.labelAnalogRightYPositive = new System.Windows.Forms.Label();
             this.hintLabel = new System.Windows.Forms.Label();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelLXDown = new System.Windows.Forms.Label();
-            this.labelLYDown = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelRYDown = new System.Windows.Forms.Label();
+            this.buttonReset = new System.Windows.Forms.Button();
+            this.panel = new System.Windows.Forms.Panel();
+            this.labelAnalogLeftXNegative = new System.Windows.Forms.Label();
+            this.labelAnalogLeftYNegative = new System.Windows.Forms.Label();
+            this.labelAnalogRightXNegative = new System.Windows.Forms.Label();
+            this.labelAnalogRightYNegative = new System.Windows.Forms.Label();
             this.groupBoxButtons = new System.Windows.Forms.GroupBox();
-            this.dropA = new XOutput.MultiLevelComboBox();
-            this.dropBack = new XOutput.MultiLevelComboBox();
-            this.dropStart = new XOutput.MultiLevelComboBox();
-            this.dropHome = new XOutput.MultiLevelComboBox();
-            this.dropY = new XOutput.MultiLevelComboBox();
-            this.dropX = new XOutput.MultiLevelComboBox();
-            this.dropB = new XOutput.MultiLevelComboBox();
-            this.groupBoxDPad = new System.Windows.Forms.GroupBox();
-            this.dropUp = new XOutput.MultiLevelComboBox();
-            this.dropRight = new XOutput.MultiLevelComboBox();
-            this.dropLeft = new XOutput.MultiLevelComboBox();
-            this.dropDown = new XOutput.MultiLevelComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.multiLevelComboBox1 = new XOutput.MultiLevelComboBox();
-            this.multiLevelComboBox2 = new XOutput.MultiLevelComboBox();
-            this.multiLevelComboBox3 = new XOutput.MultiLevelComboBox();
-            this.multiLevelComboBox4 = new XOutput.MultiLevelComboBox();
-            this.groupBoxAnalogR = new System.Windows.Forms.GroupBox();
-            this.dropRA = new XOutput.MultiLevelComboBox();
-            this.dropRXUp = new XOutput.MultiLevelComboBox();
-            this.dropRYUp = new XOutput.MultiLevelComboBox();
-            this.dropRYDown = new XOutput.MultiLevelComboBox();
-            this.dropRXDown = new XOutput.MultiLevelComboBox();
-            this.groupBoxAnalogL = new System.Windows.Forms.GroupBox();
-            this.dropLA = new XOutput.MultiLevelComboBox();
-            this.dropLXUp = new XOutput.MultiLevelComboBox();
-            this.dropLYUp = new XOutput.MultiLevelComboBox();
-            this.dropLXDown = new XOutput.MultiLevelComboBox();
-            this.dropLYDown = new XOutput.MultiLevelComboBox();
-            this.panel1.SuspendLayout();
+            this.dropButtonStart = new XOutput.MultiLevelComboBox();
+            this.dropTriggerLeft = new XOutput.MultiLevelComboBox();
+            this.dropButtonBack = new XOutput.MultiLevelComboBox();
+            this.dropBumperRight = new XOutput.MultiLevelComboBox();
+            this.dropButtonA = new XOutput.MultiLevelComboBox();
+            this.dropBumperLeft = new XOutput.MultiLevelComboBox();
+            this.dropButtonHome = new XOutput.MultiLevelComboBox();
+            this.dropButtonY = new XOutput.MultiLevelComboBox();
+            this.dropTriggerRight = new XOutput.MultiLevelComboBox();
+            this.dropButtonX = new XOutput.MultiLevelComboBox();
+            this.dropButtonB = new XOutput.MultiLevelComboBox();
+            this.groupBoxDigital = new System.Windows.Forms.GroupBox();
+            this.dropDigitalUp = new XOutput.MultiLevelComboBox();
+            this.dropDigitalRight = new XOutput.MultiLevelComboBox();
+            this.dropDigitalLeft = new XOutput.MultiLevelComboBox();
+            this.dropDigitalDown = new XOutput.MultiLevelComboBox();
+            this.groupBoxAnalogRight = new System.Windows.Forms.GroupBox();
+            this.dropAnalogRightButton = new XOutput.MultiLevelComboBox();
+            this.dropAnalogRightXPositive = new XOutput.MultiLevelComboBox();
+            this.dropAnalogRightYPositive = new XOutput.MultiLevelComboBox();
+            this.dropAnalogRightYNegative = new XOutput.MultiLevelComboBox();
+            this.dropAnalogRightXNegative = new XOutput.MultiLevelComboBox();
+            this.groupBoxAnalogLeft = new System.Windows.Forms.GroupBox();
+            this.dropAnalogLeftButton = new XOutput.MultiLevelComboBox();
+            this.dropAnalogLeftXPositive = new XOutput.MultiLevelComboBox();
+            this.dropAnalogLeftYPositive = new XOutput.MultiLevelComboBox();
+            this.dropAnalogLeftXNegative = new XOutput.MultiLevelComboBox();
+            this.dropAnalogLeftYNegative = new XOutput.MultiLevelComboBox();
+            this.panel.SuspendLayout();
             this.groupBoxButtons.SuspendLayout();
-            this.groupBoxDPad.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBoxAnalogR.SuspendLayout();
-            this.groupBoxAnalogL.SuspendLayout();
+            this.groupBoxDigital.SuspendLayout();
+            this.groupBoxAnalogRight.SuspendLayout();
+            this.groupBoxAnalogLeft.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelA
+            // labelButtonA
             // 
-            this.labelA.AutoSize = true;
-            this.labelA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelA.Location = new System.Drawing.Point(77, 23);
-            this.labelA.Name = "labelA";
-            this.labelA.Size = new System.Drawing.Size(14, 13);
-            this.labelA.TabIndex = 0;
-            this.labelA.Text = "A";
+            this.labelButtonA.AutoSize = true;
+            this.labelButtonA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonA.Location = new System.Drawing.Point(77, 23);
+            this.labelButtonA.Name = "labelButtonA";
+            this.labelButtonA.Size = new System.Drawing.Size(14, 13);
+            this.labelButtonA.TabIndex = 0;
+            this.labelButtonA.Text = "A";
             // 
-            // labelB
+            // labelButtonB
             // 
-            this.labelB.AutoSize = true;
-            this.labelB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelB.Location = new System.Drawing.Point(77, 73);
-            this.labelB.Name = "labelB";
-            this.labelB.Size = new System.Drawing.Size(14, 13);
-            this.labelB.TabIndex = 7;
-            this.labelB.Text = "B";
+            this.labelButtonB.AutoSize = true;
+            this.labelButtonB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonB.Location = new System.Drawing.Point(77, 50);
+            this.labelButtonB.Name = "labelButtonB";
+            this.labelButtonB.Size = new System.Drawing.Size(14, 13);
+            this.labelButtonB.TabIndex = 2;
+            this.labelButtonB.Text = "B";
             // 
-            // labelX
+            // labelButtonX
             // 
-            this.labelX.AutoSize = true;
-            this.labelX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX.Location = new System.Drawing.Point(77, 123);
-            this.labelX.Name = "labelX";
-            this.labelX.Size = new System.Drawing.Size(14, 13);
-            this.labelX.TabIndex = 8;
-            this.labelX.Text = "X";
+            this.labelButtonX.AutoSize = true;
+            this.labelButtonX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonX.Location = new System.Drawing.Point(77, 77);
+            this.labelButtonX.Name = "labelButtonX";
+            this.labelButtonX.Size = new System.Drawing.Size(14, 13);
+            this.labelButtonX.TabIndex = 4;
+            this.labelButtonX.Text = "X";
             // 
-            // labelY
+            // labelButtonY
             // 
-            this.labelY.AutoSize = true;
-            this.labelY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelY.Location = new System.Drawing.Point(77, 173);
-            this.labelY.Name = "labelY";
-            this.labelY.Size = new System.Drawing.Size(14, 13);
-            this.labelY.TabIndex = 9;
-            this.labelY.Text = "Y";
+            this.labelButtonY.AutoSize = true;
+            this.labelButtonY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonY.Location = new System.Drawing.Point(77, 104);
+            this.labelButtonY.Name = "labelButtonY";
+            this.labelButtonY.Size = new System.Drawing.Size(14, 13);
+            this.labelButtonY.TabIndex = 6;
+            this.labelButtonY.Text = "Y";
             // 
-            // labelUp
+            // labelDigitalUp
             // 
-            this.labelUp.AutoSize = true;
-            this.labelUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUp.Location = new System.Drawing.Point(70, 23);
-            this.labelUp.Name = "labelUp";
-            this.labelUp.Size = new System.Drawing.Size(21, 13);
-            this.labelUp.TabIndex = 14;
-            this.labelUp.Text = "Up";
+            this.labelDigitalUp.AutoSize = true;
+            this.labelDigitalUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelDigitalUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDigitalUp.Location = new System.Drawing.Point(70, 23);
+            this.labelDigitalUp.Name = "labelDigitalUp";
+            this.labelDigitalUp.Size = new System.Drawing.Size(21, 13);
+            this.labelDigitalUp.TabIndex = 0;
+            this.labelDigitalUp.Text = "Up";
             // 
-            // labelDown
+            // labelDigitalDown
             // 
-            this.labelDown.AutoSize = true;
-            this.labelDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDown.Location = new System.Drawing.Point(56, 73);
-            this.labelDown.Name = "labelDown";
-            this.labelDown.Size = new System.Drawing.Size(35, 13);
-            this.labelDown.TabIndex = 15;
-            this.labelDown.Text = "Down";
+            this.labelDigitalDown.AutoSize = true;
+            this.labelDigitalDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelDigitalDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDigitalDown.Location = new System.Drawing.Point(56, 50);
+            this.labelDigitalDown.Name = "labelDigitalDown";
+            this.labelDigitalDown.Size = new System.Drawing.Size(35, 13);
+            this.labelDigitalDown.TabIndex = 2;
+            this.labelDigitalDown.Text = "Down";
             // 
-            // labelLeft
+            // labelDigitalLeft
             // 
-            this.labelLeft.AutoSize = true;
-            this.labelLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLeft.Location = new System.Drawing.Point(66, 123);
-            this.labelLeft.Name = "labelLeft";
-            this.labelLeft.Size = new System.Drawing.Size(25, 13);
-            this.labelLeft.TabIndex = 16;
-            this.labelLeft.Text = "Left";
+            this.labelDigitalLeft.AutoSize = true;
+            this.labelDigitalLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelDigitalLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDigitalLeft.Location = new System.Drawing.Point(66, 78);
+            this.labelDigitalLeft.Name = "labelDigitalLeft";
+            this.labelDigitalLeft.Size = new System.Drawing.Size(25, 13);
+            this.labelDigitalLeft.TabIndex = 4;
+            this.labelDigitalLeft.Text = "Left";
+            this.labelDigitalLeft.Click += new System.EventHandler(this.labelLeft_Click);
             // 
-            // labelRight
+            // labelDigitalRight
             // 
-            this.labelRight.AutoSize = true;
-            this.labelRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRight.Location = new System.Drawing.Point(59, 173);
-            this.labelRight.Name = "labelRight";
-            this.labelRight.Size = new System.Drawing.Size(32, 13);
-            this.labelRight.TabIndex = 17;
-            this.labelRight.Text = "Right";
+            this.labelDigitalRight.AutoSize = true;
+            this.labelDigitalRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelDigitalRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDigitalRight.Location = new System.Drawing.Point(59, 105);
+            this.labelDigitalRight.Name = "labelDigitalRight";
+            this.labelDigitalRight.Size = new System.Drawing.Size(32, 13);
+            this.labelDigitalRight.TabIndex = 6;
+            this.labelDigitalRight.Text = "Right";
             // 
-            // labelRT
+            // labelTriggerRight
             // 
-            this.labelRT.AutoSize = true;
-            this.labelRT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRT.Location = new System.Drawing.Point(23, 120);
-            this.labelRT.Name = "labelRT";
-            this.labelRT.Size = new System.Drawing.Size(68, 13);
-            this.labelRT.TabIndex = 25;
-            this.labelRT.Text = "Right Trigger";
+            this.labelTriggerRight.AutoSize = true;
+            this.labelTriggerRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTriggerRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTriggerRight.Location = new System.Drawing.Point(253, 77);
+            this.labelTriggerRight.Name = "labelTriggerRight";
+            this.labelTriggerRight.Size = new System.Drawing.Size(68, 13);
+            this.labelTriggerRight.TabIndex = 12;
+            this.labelTriggerRight.Text = "Right Trigger";
             // 
-            // labelLT
+            // labelTriggerLeft
             // 
-            this.labelLT.AutoSize = true;
-            this.labelLT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLT.Location = new System.Drawing.Point(30, 23);
-            this.labelLT.Name = "labelLT";
-            this.labelLT.Size = new System.Drawing.Size(61, 13);
-            this.labelLT.TabIndex = 26;
-            this.labelLT.Text = "Left Trigger";
+            this.labelTriggerLeft.AutoSize = true;
+            this.labelTriggerLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTriggerLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTriggerLeft.Location = new System.Drawing.Point(260, 23);
+            this.labelTriggerLeft.Name = "labelTriggerLeft";
+            this.labelTriggerLeft.Size = new System.Drawing.Size(61, 13);
+            this.labelTriggerLeft.TabIndex = 8;
+            this.labelTriggerLeft.Text = "Left Trigger";
             // 
-            // labelRB
+            // labelBumperRight
             // 
-            this.labelRB.AutoSize = true;
-            this.labelRB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRB.Location = new System.Drawing.Point(20, 170);
-            this.labelRB.Name = "labelRB";
-            this.labelRB.Size = new System.Drawing.Size(71, 13);
-            this.labelRB.TabIndex = 27;
-            this.labelRB.Text = "Right Bumper";
+            this.labelBumperRight.AutoSize = true;
+            this.labelBumperRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelBumperRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBumperRight.Location = new System.Drawing.Point(250, 104);
+            this.labelBumperRight.Name = "labelBumperRight";
+            this.labelBumperRight.Size = new System.Drawing.Size(71, 13);
+            this.labelBumperRight.TabIndex = 14;
+            this.labelBumperRight.Text = "Right Bumper";
             // 
-            // labelLB
+            // labelBumperLeft
             // 
-            this.labelLB.AutoSize = true;
-            this.labelLB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLB.Location = new System.Drawing.Point(27, 73);
-            this.labelLB.Name = "labelLB";
-            this.labelLB.Size = new System.Drawing.Size(64, 13);
-            this.labelLB.TabIndex = 28;
-            this.labelLB.Text = "Left Bumper";
+            this.labelBumperLeft.AutoSize = true;
+            this.labelBumperLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelBumperLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBumperLeft.Location = new System.Drawing.Point(257, 50);
+            this.labelBumperLeft.Name = "labelBumperLeft";
+            this.labelBumperLeft.Size = new System.Drawing.Size(64, 13);
+            this.labelBumperLeft.TabIndex = 10;
+            this.labelBumperLeft.Text = "Left Bumper";
             // 
-            // labelBack
+            // labelButtonBack
             // 
-            this.labelBack.AutoSize = true;
-            this.labelBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBack.Location = new System.Drawing.Point(59, 268);
-            this.labelBack.Name = "labelBack";
-            this.labelBack.Size = new System.Drawing.Size(32, 13);
-            this.labelBack.TabIndex = 29;
-            this.labelBack.Text = "Back";
+            this.labelButtonBack.AutoSize = true;
+            this.labelButtonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonBack.Location = new System.Drawing.Point(519, 50);
+            this.labelButtonBack.Name = "labelButtonBack";
+            this.labelButtonBack.Size = new System.Drawing.Size(32, 13);
+            this.labelButtonBack.TabIndex = 18;
+            this.labelButtonBack.Text = "Back";
             // 
-            // labelStart
+            // labelButtonStart
             // 
-            this.labelStart.AutoSize = true;
-            this.labelStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStart.Location = new System.Drawing.Point(62, 223);
-            this.labelStart.Name = "labelStart";
-            this.labelStart.Size = new System.Drawing.Size(29, 13);
-            this.labelStart.TabIndex = 30;
-            this.labelStart.Text = "Start";
+            this.labelButtonStart.AutoSize = true;
+            this.labelButtonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonStart.Location = new System.Drawing.Point(522, 23);
+            this.labelButtonStart.Name = "labelButtonStart";
+            this.labelButtonStart.Size = new System.Drawing.Size(29, 13);
+            this.labelButtonStart.TabIndex = 16;
+            this.labelButtonStart.Text = "Start";
             // 
-            // labelHome
+            // labelButtonHome
             // 
-            this.labelHome.AutoSize = true;
-            this.labelHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHome.Location = new System.Drawing.Point(56, 365);
-            this.labelHome.Name = "labelHome";
-            this.labelHome.Size = new System.Drawing.Size(35, 13);
-            this.labelHome.TabIndex = 31;
-            this.labelHome.Text = "Home";
+            this.labelButtonHome.AutoSize = true;
+            this.labelButtonHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelButtonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButtonHome.Location = new System.Drawing.Point(516, 77);
+            this.labelButtonHome.Name = "labelButtonHome";
+            this.labelButtonHome.Size = new System.Drawing.Size(35, 13);
+            this.labelButtonHome.TabIndex = 20;
+            this.labelButtonHome.Text = "Home";
             // 
-            // labelRA
+            // labelAnalogRightButton
             // 
-            this.labelRA.AutoSize = true;
-            this.labelRA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRA.Location = new System.Drawing.Point(58, 23);
-            this.labelRA.Name = "labelRA";
-            this.labelRA.Size = new System.Drawing.Size(33, 13);
-            this.labelRA.TabIndex = 38;
-            this.labelRA.Text = "Press";
+            this.labelAnalogRightButton.AutoSize = true;
+            this.labelAnalogRightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogRightButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogRightButton.Location = new System.Drawing.Point(58, 131);
+            this.labelAnalogRightButton.Name = "labelAnalogRightButton";
+            this.labelAnalogRightButton.Size = new System.Drawing.Size(33, 13);
+            this.labelAnalogRightButton.TabIndex = 8;
+            this.labelAnalogRightButton.Text = "Press";
             // 
-            // labelLA
+            // labelAnalogLeftButton
             // 
-            this.labelLA.AutoSize = true;
-            this.labelLA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLA.Location = new System.Drawing.Point(58, 23);
-            this.labelLA.Name = "labelLA";
-            this.labelLA.Size = new System.Drawing.Size(33, 13);
-            this.labelLA.TabIndex = 39;
-            this.labelLA.Text = "Press";
+            this.labelAnalogLeftButton.AutoSize = true;
+            this.labelAnalogLeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogLeftButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogLeftButton.Location = new System.Drawing.Point(58, 130);
+            this.labelAnalogLeftButton.Name = "labelAnalogLeftButton";
+            this.labelAnalogLeftButton.Size = new System.Drawing.Size(33, 13);
+            this.labelAnalogLeftButton.TabIndex = 8;
+            this.labelAnalogLeftButton.Text = "Press";
             // 
-            // labelLXUp
+            // labelAnalogLeftXPositive
             // 
-            this.labelLXUp.AutoSize = true;
-            this.labelLXUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLXUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLXUp.Location = new System.Drawing.Point(59, 73);
-            this.labelLXUp.Name = "labelLXUp";
-            this.labelLXUp.Size = new System.Drawing.Size(32, 13);
-            this.labelLXUp.TabIndex = 40;
-            this.labelLXUp.Text = "Right";
+            this.labelAnalogLeftXPositive.AutoSize = true;
+            this.labelAnalogLeftXPositive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogLeftXPositive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogLeftXPositive.Location = new System.Drawing.Point(59, 103);
+            this.labelAnalogLeftXPositive.Name = "labelAnalogLeftXPositive";
+            this.labelAnalogLeftXPositive.Size = new System.Drawing.Size(32, 13);
+            this.labelAnalogLeftXPositive.TabIndex = 6;
+            this.labelAnalogLeftXPositive.Text = "Right";
             // 
-            // labelRX
+            // labelAnalogRightXPositive
             // 
-            this.labelRX.AutoSize = true;
-            this.labelRX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRX.Location = new System.Drawing.Point(59, 73);
-            this.labelRX.Name = "labelRX";
-            this.labelRX.Size = new System.Drawing.Size(32, 13);
-            this.labelRX.TabIndex = 41;
-            this.labelRX.Text = "Right";
+            this.labelAnalogRightXPositive.AutoSize = true;
+            this.labelAnalogRightXPositive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogRightXPositive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogRightXPositive.Location = new System.Drawing.Point(59, 104);
+            this.labelAnalogRightXPositive.Name = "labelAnalogRightXPositive";
+            this.labelAnalogRightXPositive.Size = new System.Drawing.Size(32, 13);
+            this.labelAnalogRightXPositive.TabIndex = 6;
+            this.labelAnalogRightXPositive.Text = "Right";
             // 
-            // labelLYUp
+            // labelAnalogLeftYPositive
             // 
-            this.labelLYUp.AutoSize = true;
-            this.labelLYUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLYUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLYUp.Location = new System.Drawing.Point(69, 170);
-            this.labelLYUp.Name = "labelLYUp";
-            this.labelLYUp.Size = new System.Drawing.Size(21, 13);
-            this.labelLYUp.TabIndex = 42;
-            this.labelLYUp.Text = "Up";
+            this.labelAnalogLeftYPositive.AutoSize = true;
+            this.labelAnalogLeftYPositive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogLeftYPositive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogLeftYPositive.Location = new System.Drawing.Point(70, 22);
+            this.labelAnalogLeftYPositive.Name = "labelAnalogLeftYPositive";
+            this.labelAnalogLeftYPositive.Size = new System.Drawing.Size(21, 13);
+            this.labelAnalogLeftYPositive.TabIndex = 0;
+            this.labelAnalogLeftYPositive.Text = "Up";
             // 
-            // labelRY
+            // labelAnalogRightYPositive
             // 
-            this.labelRY.AutoSize = true;
-            this.labelRY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRY.Location = new System.Drawing.Point(70, 173);
-            this.labelRY.Name = "labelRY";
-            this.labelRY.Size = new System.Drawing.Size(21, 13);
-            this.labelRY.TabIndex = 43;
-            this.labelRY.Text = "Up";
+            this.labelAnalogRightYPositive.AutoSize = true;
+            this.labelAnalogRightYPositive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogRightYPositive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogRightYPositive.Location = new System.Drawing.Point(70, 23);
+            this.labelAnalogRightYPositive.Name = "labelAnalogRightYPositive";
+            this.labelAnalogRightYPositive.Size = new System.Drawing.Size(21, 13);
+            this.labelAnalogRightYPositive.TabIndex = 0;
+            this.labelAnalogRightYPositive.Text = "Up";
             // 
             // hintLabel
             // 
-            this.hintLabel.AutoSize = true;
             this.hintLabel.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.hintLabel.Location = new System.Drawing.Point(40, 11);
+            this.hintLabel.Location = new System.Drawing.Point(12, 16);
             this.hintLabel.Name = "hintLabel";
-            this.hintLabel.Size = new System.Drawing.Size(50, 13);
-            this.hintLabel.TabIndex = 44;
-            this.hintLabel.Text = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(557, 13);
+            this.hintLabel.TabIndex = 0;
             // 
-            // resetButton
+            // buttonReset
             // 
-            this.resetButton.Location = new System.Drawing.Point(579, 6);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(121, 23);
-            this.resetButton.TabIndex = 45;
-            this.resetButton.Text = "Reset Profile";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            this.buttonReset.Location = new System.Drawing.Point(575, 11);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(121, 23);
+            this.buttonReset.TabIndex = 1;
+            this.buttonReset.Text = "Reset Profile";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.resetButton_Click);
             // 
-            // panel1
+            // panel
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.resetButton);
-            this.panel1.Controls.Add(this.hintLabel);
-            this.panel1.Location = new System.Drawing.Point(-4, 589);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1204, 42);
-            this.panel1.TabIndex = 46;
+            this.panel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel.Controls.Add(this.buttonReset);
+            this.panel.Controls.Add(this.hintLabel);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel.Location = new System.Drawing.Point(0, 315);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(706, 46);
+            this.panel.TabIndex = 6;
             // 
-            // labelLXDown
+            // labelAnalogLeftXNegative
             // 
-            this.labelLXDown.AutoSize = true;
-            this.labelLXDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLXDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLXDown.Location = new System.Drawing.Point(66, 120);
-            this.labelLXDown.Name = "labelLXDown";
-            this.labelLXDown.Size = new System.Drawing.Size(25, 13);
-            this.labelLXDown.TabIndex = 48;
-            this.labelLXDown.Text = "Left";
+            this.labelAnalogLeftXNegative.AutoSize = true;
+            this.labelAnalogLeftXNegative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogLeftXNegative.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogLeftXNegative.Location = new System.Drawing.Point(66, 76);
+            this.labelAnalogLeftXNegative.Name = "labelAnalogLeftXNegative";
+            this.labelAnalogLeftXNegative.Size = new System.Drawing.Size(25, 13);
+            this.labelAnalogLeftXNegative.TabIndex = 4;
+            this.labelAnalogLeftXNegative.Text = "Left";
             // 
-            // labelLYDown
+            // labelAnalogLeftYNegative
             // 
-            this.labelLYDown.AutoSize = true;
-            this.labelLYDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelLYDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLYDown.Location = new System.Drawing.Point(56, 223);
-            this.labelLYDown.Name = "labelLYDown";
-            this.labelLYDown.Size = new System.Drawing.Size(35, 13);
-            this.labelLYDown.TabIndex = 50;
-            this.labelLYDown.Text = "Down";
+            this.labelAnalogLeftYNegative.AutoSize = true;
+            this.labelAnalogLeftYNegative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogLeftYNegative.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogLeftYNegative.Location = new System.Drawing.Point(56, 49);
+            this.labelAnalogLeftYNegative.Name = "labelAnalogLeftYNegative";
+            this.labelAnalogLeftYNegative.Size = new System.Drawing.Size(35, 13);
+            this.labelAnalogLeftYNegative.TabIndex = 2;
+            this.labelAnalogLeftYNegative.Text = "Down";
             // 
-            // label1
+            // labelAnalogRightXNegative
             // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(66, 120);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 13);
-            this.label1.TabIndex = 52;
-            this.label1.Text = "Left";
+            this.labelAnalogRightXNegative.AutoSize = true;
+            this.labelAnalogRightXNegative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogRightXNegative.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogRightXNegative.Location = new System.Drawing.Point(66, 77);
+            this.labelAnalogRightXNegative.Name = "labelAnalogRightXNegative";
+            this.labelAnalogRightXNegative.Size = new System.Drawing.Size(25, 13);
+            this.labelAnalogRightXNegative.TabIndex = 4;
+            this.labelAnalogRightXNegative.Text = "Left";
             // 
-            // labelRYDown
+            // labelAnalogRightYNegative
             // 
-            this.labelRYDown.AutoSize = true;
-            this.labelRYDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelRYDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRYDown.Location = new System.Drawing.Point(56, 223);
-            this.labelRYDown.Name = "labelRYDown";
-            this.labelRYDown.Size = new System.Drawing.Size(35, 13);
-            this.labelRYDown.TabIndex = 54;
-            this.labelRYDown.Text = "Down";
+            this.labelAnalogRightYNegative.AutoSize = true;
+            this.labelAnalogRightYNegative.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelAnalogRightYNegative.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnalogRightYNegative.Location = new System.Drawing.Point(56, 50);
+            this.labelAnalogRightYNegative.Name = "labelAnalogRightYNegative";
+            this.labelAnalogRightYNegative.Size = new System.Drawing.Size(35, 13);
+            this.labelAnalogRightYNegative.TabIndex = 2;
+            this.labelAnalogRightYNegative.Text = "Down";
             // 
             // groupBoxButtons
             // 
-            this.groupBoxButtons.Controls.Add(this.dropA);
-            this.groupBoxButtons.Controls.Add(this.dropBack);
-            this.groupBoxButtons.Controls.Add(this.dropStart);
-            this.groupBoxButtons.Controls.Add(this.dropHome);
-            this.groupBoxButtons.Controls.Add(this.dropY);
-            this.groupBoxButtons.Controls.Add(this.dropX);
-            this.groupBoxButtons.Controls.Add(this.dropB);
-            this.groupBoxButtons.Controls.Add(this.labelA);
-            this.groupBoxButtons.Controls.Add(this.labelB);
-            this.groupBoxButtons.Controls.Add(this.labelX);
-            this.groupBoxButtons.Controls.Add(this.labelY);
-            this.groupBoxButtons.Controls.Add(this.labelBack);
-            this.groupBoxButtons.Controls.Add(this.labelStart);
-            this.groupBoxButtons.Controls.Add(this.labelHome);
-            this.groupBoxButtons.Location = new System.Drawing.Point(472, 12);
+            this.groupBoxButtons.Controls.Add(this.dropButtonStart);
+            this.groupBoxButtons.Controls.Add(this.dropTriggerLeft);
+            this.groupBoxButtons.Controls.Add(this.dropButtonBack);
+            this.groupBoxButtons.Controls.Add(this.dropBumperRight);
+            this.groupBoxButtons.Controls.Add(this.labelButtonHome);
+            this.groupBoxButtons.Controls.Add(this.dropButtonA);
+            this.groupBoxButtons.Controls.Add(this.labelButtonStart);
+            this.groupBoxButtons.Controls.Add(this.dropBumperLeft);
+            this.groupBoxButtons.Controls.Add(this.dropButtonHome);
+            this.groupBoxButtons.Controls.Add(this.labelButtonBack);
+            this.groupBoxButtons.Controls.Add(this.dropButtonY);
+            this.groupBoxButtons.Controls.Add(this.dropTriggerRight);
+            this.groupBoxButtons.Controls.Add(this.dropButtonX);
+            this.groupBoxButtons.Controls.Add(this.labelTriggerLeft);
+            this.groupBoxButtons.Controls.Add(this.dropButtonB);
+            this.groupBoxButtons.Controls.Add(this.labelBumperRight);
+            this.groupBoxButtons.Controls.Add(this.labelButtonA);
+            this.groupBoxButtons.Controls.Add(this.labelBumperLeft);
+            this.groupBoxButtons.Controls.Add(this.labelButtonB);
+            this.groupBoxButtons.Controls.Add(this.labelTriggerRight);
+            this.groupBoxButtons.Controls.Add(this.labelButtonX);
+            this.groupBoxButtons.Controls.Add(this.labelButtonY);
+            this.groupBoxButtons.Location = new System.Drawing.Point(12, 174);
             this.groupBoxButtons.Name = "groupBoxButtons";
-            this.groupBoxButtons.Size = new System.Drawing.Size(224, 571);
-            this.groupBoxButtons.TabIndex = 0;
+            this.groupBoxButtons.Size = new System.Drawing.Size(684, 130);
+            this.groupBoxButtons.TabIndex = 3;
             this.groupBoxButtons.TabStop = false;
             this.groupBoxButtons.Text = "Buttons";
             // 
-            // dropA
+            // dropButtonStart
             // 
-            this.dropA.FormattingEnabled = true;
-            this.dropA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropA.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonStart.FormattingEnabled = true;
+            this.dropButtonStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonStart.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropA.Location = new System.Drawing.Point(97, 20);
-            this.dropA.Name = "dropA";
-            this.dropA.Size = new System.Drawing.Size(121, 21);
-            this.dropA.TabIndex = 0;
+            this.dropButtonStart.Location = new System.Drawing.Point(557, 20);
+            this.dropButtonStart.Name = "dropButtonStart";
+            this.dropButtonStart.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonStart.TabIndex = 17;
             // 
-            // dropBack
+            // dropTriggerLeft
             // 
-            this.dropBack.FormattingEnabled = true;
-            this.dropBack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropBack.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropTriggerLeft.FormattingEnabled = true;
+            this.dropTriggerLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropTriggerLeft.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropBack.Location = new System.Drawing.Point(97, 265);
-            this.dropBack.Name = "dropBack";
-            this.dropBack.Size = new System.Drawing.Size(121, 21);
-            this.dropBack.TabIndex = 16;
+            this.dropTriggerLeft.Location = new System.Drawing.Point(327, 20);
+            this.dropTriggerLeft.Name = "dropTriggerLeft";
+            this.dropTriggerLeft.Size = new System.Drawing.Size(121, 21);
+            this.dropTriggerLeft.TabIndex = 9;
             // 
-            // dropStart
+            // dropButtonBack
             // 
-            this.dropStart.FormattingEnabled = true;
-            this.dropStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropStart.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonBack.FormattingEnabled = true;
+            this.dropButtonBack.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonBack.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropStart.Location = new System.Drawing.Point(97, 220);
-            this.dropStart.Name = "dropStart";
-            this.dropStart.Size = new System.Drawing.Size(121, 21);
-            this.dropStart.TabIndex = 15;
+            this.dropButtonBack.Location = new System.Drawing.Point(557, 47);
+            this.dropButtonBack.Name = "dropButtonBack";
+            this.dropButtonBack.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonBack.TabIndex = 19;
             // 
-            // dropHome
+            // dropBumperRight
             // 
-            this.dropHome.FormattingEnabled = true;
-            this.dropHome.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropHome.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropBumperRight.FormattingEnabled = true;
+            this.dropBumperRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropBumperRight.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropHome.Location = new System.Drawing.Point(97, 362);
-            this.dropHome.Name = "dropHome";
-            this.dropHome.Size = new System.Drawing.Size(121, 21);
-            this.dropHome.TabIndex = 14;
+            this.dropBumperRight.Location = new System.Drawing.Point(327, 101);
+            this.dropBumperRight.Name = "dropBumperRight";
+            this.dropBumperRight.Size = new System.Drawing.Size(121, 21);
+            this.dropBumperRight.TabIndex = 15;
             // 
-            // dropY
+            // dropButtonA
             // 
-            this.dropY.FormattingEnabled = true;
-            this.dropY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropY.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonA.FormattingEnabled = true;
+            this.dropButtonA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonA.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropY.Location = new System.Drawing.Point(97, 170);
-            this.dropY.Name = "dropY";
-            this.dropY.Size = new System.Drawing.Size(121, 21);
-            this.dropY.TabIndex = 3;
+            this.dropButtonA.Location = new System.Drawing.Point(97, 20);
+            this.dropButtonA.Name = "dropButtonA";
+            this.dropButtonA.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonA.TabIndex = 1;
             // 
-            // dropX
+            // dropBumperLeft
             // 
-            this.dropX.FormattingEnabled = true;
-            this.dropX.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropX.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropBumperLeft.FormattingEnabled = true;
+            this.dropBumperLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropBumperLeft.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropX.Location = new System.Drawing.Point(97, 120);
-            this.dropX.Name = "dropX";
-            this.dropX.Size = new System.Drawing.Size(121, 21);
-            this.dropX.TabIndex = 2;
+            this.dropBumperLeft.Location = new System.Drawing.Point(327, 47);
+            this.dropBumperLeft.Name = "dropBumperLeft";
+            this.dropBumperLeft.Size = new System.Drawing.Size(121, 21);
+            this.dropBumperLeft.TabIndex = 11;
             // 
-            // dropB
+            // dropButtonHome
             // 
-            this.dropB.FormattingEnabled = true;
-            this.dropB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropB.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonHome.FormattingEnabled = true;
+            this.dropButtonHome.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonHome.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropB.Location = new System.Drawing.Point(97, 70);
-            this.dropB.Name = "dropB";
-            this.dropB.Size = new System.Drawing.Size(121, 21);
-            this.dropB.TabIndex = 1;
+            this.dropButtonHome.Location = new System.Drawing.Point(557, 74);
+            this.dropButtonHome.Name = "dropButtonHome";
+            this.dropButtonHome.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonHome.TabIndex = 21;
             // 
-            // groupBoxDPad
+            // dropButtonY
             // 
-            this.groupBoxDPad.Controls.Add(this.dropUp);
-            this.groupBoxDPad.Controls.Add(this.dropRight);
-            this.groupBoxDPad.Controls.Add(this.dropLeft);
-            this.groupBoxDPad.Controls.Add(this.dropDown);
-            this.groupBoxDPad.Controls.Add(this.labelUp);
-            this.groupBoxDPad.Controls.Add(this.labelDown);
-            this.groupBoxDPad.Controls.Add(this.labelLeft);
-            this.groupBoxDPad.Controls.Add(this.labelRight);
-            this.groupBoxDPad.Location = new System.Drawing.Point(242, 302);
-            this.groupBoxDPad.Name = "groupBoxDPad";
-            this.groupBoxDPad.Size = new System.Drawing.Size(224, 281);
-            this.groupBoxDPad.TabIndex = 1;
-            this.groupBoxDPad.TabStop = false;
-            this.groupBoxDPad.Text = "DPad";
-            // 
-            // dropUp
-            // 
-            this.dropUp.FormattingEnabled = true;
-            this.dropUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropUp.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonY.FormattingEnabled = true;
+            this.dropButtonY.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonY.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropUp.Location = new System.Drawing.Point(97, 20);
-            this.dropUp.Name = "dropUp";
-            this.dropUp.Size = new System.Drawing.Size(121, 21);
-            this.dropUp.TabIndex = 4;
+            this.dropButtonY.Location = new System.Drawing.Point(97, 101);
+            this.dropButtonY.Name = "dropButtonY";
+            this.dropButtonY.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonY.TabIndex = 7;
             // 
-            // dropRight
+            // dropTriggerRight
             // 
-            this.dropRight.FormattingEnabled = true;
-            this.dropRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropRight.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropTriggerRight.FormattingEnabled = true;
+            this.dropTriggerRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropTriggerRight.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropRight.Location = new System.Drawing.Point(97, 170);
-            this.dropRight.Name = "dropRight";
-            this.dropRight.Size = new System.Drawing.Size(121, 21);
-            this.dropRight.TabIndex = 7;
+            this.dropTriggerRight.Location = new System.Drawing.Point(327, 74);
+            this.dropTriggerRight.Name = "dropTriggerRight";
+            this.dropTriggerRight.Size = new System.Drawing.Size(121, 21);
+            this.dropTriggerRight.TabIndex = 13;
             // 
-            // dropLeft
+            // dropButtonX
             // 
-            this.dropLeft.FormattingEnabled = true;
-            this.dropLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropLeft.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonX.FormattingEnabled = true;
+            this.dropButtonX.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonX.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropLeft.Location = new System.Drawing.Point(97, 120);
-            this.dropLeft.Name = "dropLeft";
-            this.dropLeft.Size = new System.Drawing.Size(121, 21);
-            this.dropLeft.TabIndex = 6;
+            this.dropButtonX.Location = new System.Drawing.Point(97, 74);
+            this.dropButtonX.Name = "dropButtonX";
+            this.dropButtonX.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonX.TabIndex = 5;
             // 
-            // dropDown
+            // dropButtonB
             // 
-            this.dropDown.FormattingEnabled = true;
-            this.dropDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropDown.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropButtonB.FormattingEnabled = true;
+            this.dropButtonB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropButtonB.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropDown.Location = new System.Drawing.Point(97, 70);
-            this.dropDown.Name = "dropDown";
-            this.dropDown.Size = new System.Drawing.Size(121, 21);
-            this.dropDown.TabIndex = 5;
+            this.dropButtonB.Location = new System.Drawing.Point(97, 47);
+            this.dropButtonB.Name = "dropButtonB";
+            this.dropButtonB.Size = new System.Drawing.Size(121, 21);
+            this.dropButtonB.TabIndex = 3;
             // 
-            // groupBox1
+            // groupBoxDigital
             // 
-            this.groupBox1.Controls.Add(this.multiLevelComboBox1);
-            this.groupBox1.Controls.Add(this.multiLevelComboBox2);
-            this.groupBox1.Controls.Add(this.multiLevelComboBox3);
-            this.groupBox1.Controls.Add(this.multiLevelComboBox4);
-            this.groupBox1.Controls.Add(this.labelLT);
-            this.groupBox1.Controls.Add(this.labelRB);
-            this.groupBox1.Controls.Add(this.labelLB);
-            this.groupBox1.Controls.Add(this.labelRT);
-            this.groupBox1.Location = new System.Drawing.Point(242, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(224, 281);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Shoulders";
+            this.groupBoxDigital.Controls.Add(this.dropDigitalUp);
+            this.groupBoxDigital.Controls.Add(this.dropDigitalRight);
+            this.groupBoxDigital.Controls.Add(this.dropDigitalLeft);
+            this.groupBoxDigital.Controls.Add(this.dropDigitalDown);
+            this.groupBoxDigital.Controls.Add(this.labelDigitalUp);
+            this.groupBoxDigital.Controls.Add(this.labelDigitalDown);
+            this.groupBoxDigital.Controls.Add(this.labelDigitalLeft);
+            this.groupBoxDigital.Controls.Add(this.labelDigitalRight);
+            this.groupBoxDigital.Location = new System.Drawing.Point(472, 12);
+            this.groupBoxDigital.Name = "groupBoxDigital";
+            this.groupBoxDigital.Size = new System.Drawing.Size(224, 130);
+            this.groupBoxDigital.TabIndex = 2;
+            this.groupBoxDigital.TabStop = false;
+            this.groupBoxDigital.Text = "D-Pad";
             // 
-            // multiLevelComboBox1
+            // dropDigitalUp
             // 
-            this.multiLevelComboBox1.FormattingEnabled = true;
-            this.multiLevelComboBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.multiLevelComboBox1.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropDigitalUp.FormattingEnabled = true;
+            this.dropDigitalUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropDigitalUp.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.multiLevelComboBox1.Location = new System.Drawing.Point(97, 20);
-            this.multiLevelComboBox1.Name = "multiLevelComboBox1";
-            this.multiLevelComboBox1.Size = new System.Drawing.Size(121, 21);
-            this.multiLevelComboBox1.TabIndex = 8;
+            this.dropDigitalUp.Location = new System.Drawing.Point(97, 20);
+            this.dropDigitalUp.Name = "dropDigitalUp";
+            this.dropDigitalUp.Size = new System.Drawing.Size(121, 21);
+            this.dropDigitalUp.TabIndex = 1;
             // 
-            // multiLevelComboBox2
+            // dropDigitalRight
             // 
-            this.multiLevelComboBox2.FormattingEnabled = true;
-            this.multiLevelComboBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.multiLevelComboBox2.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropDigitalRight.FormattingEnabled = true;
+            this.dropDigitalRight.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropDigitalRight.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.multiLevelComboBox2.Location = new System.Drawing.Point(97, 167);
-            this.multiLevelComboBox2.Name = "multiLevelComboBox2";
-            this.multiLevelComboBox2.Size = new System.Drawing.Size(121, 21);
-            this.multiLevelComboBox2.TabIndex = 11;
+            this.dropDigitalRight.Location = new System.Drawing.Point(97, 102);
+            this.dropDigitalRight.Name = "dropDigitalRight";
+            this.dropDigitalRight.Size = new System.Drawing.Size(121, 21);
+            this.dropDigitalRight.TabIndex = 7;
             // 
-            // multiLevelComboBox3
+            // dropDigitalLeft
             // 
-            this.multiLevelComboBox3.FormattingEnabled = true;
-            this.multiLevelComboBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.multiLevelComboBox3.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropDigitalLeft.FormattingEnabled = true;
+            this.dropDigitalLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropDigitalLeft.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.multiLevelComboBox3.Location = new System.Drawing.Point(97, 70);
-            this.multiLevelComboBox3.Name = "multiLevelComboBox3";
-            this.multiLevelComboBox3.Size = new System.Drawing.Size(121, 21);
-            this.multiLevelComboBox3.TabIndex = 10;
+            this.dropDigitalLeft.Location = new System.Drawing.Point(97, 75);
+            this.dropDigitalLeft.Name = "dropDigitalLeft";
+            this.dropDigitalLeft.Size = new System.Drawing.Size(121, 21);
+            this.dropDigitalLeft.TabIndex = 5;
             // 
-            // multiLevelComboBox4
+            // dropDigitalDown
             // 
-            this.multiLevelComboBox4.FormattingEnabled = true;
-            this.multiLevelComboBox4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.multiLevelComboBox4.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropDigitalDown.FormattingEnabled = true;
+            this.dropDigitalDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropDigitalDown.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.multiLevelComboBox4.Location = new System.Drawing.Point(97, 117);
-            this.multiLevelComboBox4.Name = "multiLevelComboBox4";
-            this.multiLevelComboBox4.Size = new System.Drawing.Size(121, 21);
-            this.multiLevelComboBox4.TabIndex = 9;
+            this.dropDigitalDown.Location = new System.Drawing.Point(97, 47);
+            this.dropDigitalDown.Name = "dropDigitalDown";
+            this.dropDigitalDown.Size = new System.Drawing.Size(121, 21);
+            this.dropDigitalDown.TabIndex = 3;
             // 
-            // groupBoxAnalogR
+            // groupBoxAnalogRight
             // 
-            this.groupBoxAnalogR.Controls.Add(this.dropRA);
-            this.groupBoxAnalogR.Controls.Add(this.dropRXUp);
-            this.groupBoxAnalogR.Controls.Add(this.dropRYUp);
-            this.groupBoxAnalogR.Controls.Add(this.labelRA);
-            this.groupBoxAnalogR.Controls.Add(this.labelRX);
-            this.groupBoxAnalogR.Controls.Add(this.labelRYDown);
-            this.groupBoxAnalogR.Controls.Add(this.labelRY);
-            this.groupBoxAnalogR.Controls.Add(this.dropRYDown);
-            this.groupBoxAnalogR.Controls.Add(this.dropRXDown);
-            this.groupBoxAnalogR.Controls.Add(this.label1);
-            this.groupBoxAnalogR.Location = new System.Drawing.Point(12, 302);
-            this.groupBoxAnalogR.Name = "groupBoxAnalogR";
-            this.groupBoxAnalogR.Size = new System.Drawing.Size(224, 281);
-            this.groupBoxAnalogR.TabIndex = 4;
-            this.groupBoxAnalogR.TabStop = false;
-            this.groupBoxAnalogR.Text = "Right Analog Stick";
+            this.groupBoxAnalogRight.Controls.Add(this.dropAnalogRightButton);
+            this.groupBoxAnalogRight.Controls.Add(this.dropAnalogRightXPositive);
+            this.groupBoxAnalogRight.Controls.Add(this.dropAnalogRightYPositive);
+            this.groupBoxAnalogRight.Controls.Add(this.labelAnalogRightButton);
+            this.groupBoxAnalogRight.Controls.Add(this.labelAnalogRightXPositive);
+            this.groupBoxAnalogRight.Controls.Add(this.labelAnalogRightYNegative);
+            this.groupBoxAnalogRight.Controls.Add(this.labelAnalogRightYPositive);
+            this.groupBoxAnalogRight.Controls.Add(this.dropAnalogRightYNegative);
+            this.groupBoxAnalogRight.Controls.Add(this.dropAnalogRightXNegative);
+            this.groupBoxAnalogRight.Controls.Add(this.labelAnalogRightXNegative);
+            this.groupBoxAnalogRight.Location = new System.Drawing.Point(242, 12);
+            this.groupBoxAnalogRight.Name = "groupBoxAnalogRight";
+            this.groupBoxAnalogRight.Size = new System.Drawing.Size(224, 156);
+            this.groupBoxAnalogRight.TabIndex = 1;
+            this.groupBoxAnalogRight.TabStop = false;
+            this.groupBoxAnalogRight.Text = "Right Analog Stick";
             // 
-            // dropRA
+            // dropAnalogRightButton
             // 
-            this.dropRA.FormattingEnabled = true;
-            this.dropRA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropRA.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogRightButton.FormattingEnabled = true;
+            this.dropAnalogRightButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogRightButton.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropRA.Location = new System.Drawing.Point(97, 20);
-            this.dropRA.Name = "dropRA";
-            this.dropRA.Size = new System.Drawing.Size(121, 21);
-            this.dropRA.TabIndex = 13;
+            this.dropAnalogRightButton.Location = new System.Drawing.Point(97, 128);
+            this.dropAnalogRightButton.Name = "dropAnalogRightButton";
+            this.dropAnalogRightButton.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogRightButton.TabIndex = 9;
             // 
-            // dropRXUp
+            // dropAnalogRightXPositive
             // 
-            this.dropRXUp.FormattingEnabled = true;
-            this.dropRXUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropRXUp.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogRightXPositive.FormattingEnabled = true;
+            this.dropAnalogRightXPositive.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogRightXPositive.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropRXUp.Location = new System.Drawing.Point(97, 70);
-            this.dropRXUp.Name = "dropRXUp";
-            this.dropRXUp.Size = new System.Drawing.Size(121, 21);
-            this.dropRXUp.TabIndex = 23;
+            this.dropAnalogRightXPositive.Location = new System.Drawing.Point(97, 101);
+            this.dropAnalogRightXPositive.Name = "dropAnalogRightXPositive";
+            this.dropAnalogRightXPositive.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogRightXPositive.TabIndex = 7;
             // 
-            // dropRYUp
+            // dropAnalogRightYPositive
             // 
-            this.dropRYUp.FormattingEnabled = true;
-            this.dropRYUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropRYUp.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogRightYPositive.FormattingEnabled = true;
+            this.dropAnalogRightYPositive.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogRightYPositive.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropRYUp.Location = new System.Drawing.Point(97, 170);
-            this.dropRYUp.Name = "dropRYUp";
-            this.dropRYUp.Size = new System.Drawing.Size(121, 21);
-            this.dropRYUp.TabIndex = 21;
+            this.dropAnalogRightYPositive.Location = new System.Drawing.Point(97, 20);
+            this.dropAnalogRightYPositive.Name = "dropAnalogRightYPositive";
+            this.dropAnalogRightYPositive.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogRightYPositive.TabIndex = 1;
             // 
-            // dropRYDown
+            // dropAnalogRightYNegative
             // 
-            this.dropRYDown.FormattingEnabled = true;
-            this.dropRYDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropRYDown.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogRightYNegative.FormattingEnabled = true;
+            this.dropAnalogRightYNegative.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogRightYNegative.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropRYDown.Location = new System.Drawing.Point(97, 220);
-            this.dropRYDown.Name = "dropRYDown";
-            this.dropRYDown.Size = new System.Drawing.Size(121, 21);
-            this.dropRYDown.TabIndex = 22;
+            this.dropAnalogRightYNegative.Location = new System.Drawing.Point(97, 47);
+            this.dropAnalogRightYNegative.Name = "dropAnalogRightYNegative";
+            this.dropAnalogRightYNegative.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogRightYNegative.TabIndex = 3;
             // 
-            // dropRXDown
+            // dropAnalogRightXNegative
             // 
-            this.dropRXDown.FormattingEnabled = true;
-            this.dropRXDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropRXDown.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogRightXNegative.FormattingEnabled = true;
+            this.dropAnalogRightXNegative.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogRightXNegative.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropRXDown.Location = new System.Drawing.Point(97, 117);
-            this.dropRXDown.Name = "dropRXDown";
-            this.dropRXDown.Size = new System.Drawing.Size(121, 21);
-            this.dropRXDown.TabIndex = 24;
+            this.dropAnalogRightXNegative.Location = new System.Drawing.Point(97, 74);
+            this.dropAnalogRightXNegative.Name = "dropAnalogRightXNegative";
+            this.dropAnalogRightXNegative.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogRightXNegative.TabIndex = 5;
             // 
-            // groupBoxAnalogL
+            // groupBoxAnalogLeft
             // 
-            this.groupBoxAnalogL.Controls.Add(this.dropLA);
-            this.groupBoxAnalogL.Controls.Add(this.dropLXUp);
-            this.groupBoxAnalogL.Controls.Add(this.dropLYUp);
-            this.groupBoxAnalogL.Controls.Add(this.labelLA);
-            this.groupBoxAnalogL.Controls.Add(this.labelLXUp);
-            this.groupBoxAnalogL.Controls.Add(this.labelLYUp);
-            this.groupBoxAnalogL.Controls.Add(this.labelLYDown);
-            this.groupBoxAnalogL.Controls.Add(this.dropLXDown);
-            this.groupBoxAnalogL.Controls.Add(this.dropLYDown);
-            this.groupBoxAnalogL.Controls.Add(this.labelLXDown);
-            this.groupBoxAnalogL.Location = new System.Drawing.Point(12, 12);
-            this.groupBoxAnalogL.Name = "groupBoxAnalogL";
-            this.groupBoxAnalogL.Size = new System.Drawing.Size(224, 281);
-            this.groupBoxAnalogL.TabIndex = 3;
-            this.groupBoxAnalogL.TabStop = false;
-            this.groupBoxAnalogL.Text = "Left Analog Stick";
+            this.groupBoxAnalogLeft.Controls.Add(this.dropAnalogLeftButton);
+            this.groupBoxAnalogLeft.Controls.Add(this.dropAnalogLeftXPositive);
+            this.groupBoxAnalogLeft.Controls.Add(this.dropAnalogLeftYPositive);
+            this.groupBoxAnalogLeft.Controls.Add(this.labelAnalogLeftButton);
+            this.groupBoxAnalogLeft.Controls.Add(this.labelAnalogLeftXPositive);
+            this.groupBoxAnalogLeft.Controls.Add(this.labelAnalogLeftYPositive);
+            this.groupBoxAnalogLeft.Controls.Add(this.labelAnalogLeftYNegative);
+            this.groupBoxAnalogLeft.Controls.Add(this.dropAnalogLeftXNegative);
+            this.groupBoxAnalogLeft.Controls.Add(this.dropAnalogLeftYNegative);
+            this.groupBoxAnalogLeft.Controls.Add(this.labelAnalogLeftXNegative);
+            this.groupBoxAnalogLeft.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxAnalogLeft.Name = "groupBoxAnalogLeft";
+            this.groupBoxAnalogLeft.Size = new System.Drawing.Size(224, 156);
+            this.groupBoxAnalogLeft.TabIndex = 0;
+            this.groupBoxAnalogLeft.TabStop = false;
+            this.groupBoxAnalogLeft.Text = "Left Analog Stick";
             // 
-            // dropLA
+            // dropAnalogLeftButton
             // 
-            this.dropLA.FormattingEnabled = true;
-            this.dropLA.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropLA.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogLeftButton.FormattingEnabled = true;
+            this.dropAnalogLeftButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogLeftButton.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropLA.Location = new System.Drawing.Point(97, 20);
-            this.dropLA.Name = "dropLA";
-            this.dropLA.Size = new System.Drawing.Size(121, 21);
-            this.dropLA.TabIndex = 12;
-            this.dropLA.Tag = "";
+            this.dropAnalogLeftButton.Location = new System.Drawing.Point(97, 127);
+            this.dropAnalogLeftButton.Name = "dropAnalogLeftButton";
+            this.dropAnalogLeftButton.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogLeftButton.TabIndex = 9;
+            this.dropAnalogLeftButton.Tag = "";
             // 
-            // dropLXUp
+            // dropAnalogLeftXPositive
             // 
-            this.dropLXUp.FormattingEnabled = true;
-            this.dropLXUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropLXUp.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogLeftXPositive.FormattingEnabled = true;
+            this.dropAnalogLeftXPositive.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogLeftXPositive.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropLXUp.Location = new System.Drawing.Point(97, 70);
-            this.dropLXUp.Name = "dropLXUp";
-            this.dropLXUp.Size = new System.Drawing.Size(121, 21);
-            this.dropLXUp.TabIndex = 19;
+            this.dropAnalogLeftXPositive.Location = new System.Drawing.Point(97, 100);
+            this.dropAnalogLeftXPositive.Name = "dropAnalogLeftXPositive";
+            this.dropAnalogLeftXPositive.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogLeftXPositive.TabIndex = 7;
             // 
-            // dropLYUp
+            // dropAnalogLeftYPositive
             // 
-            this.dropLYUp.FormattingEnabled = true;
-            this.dropLYUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropLYUp.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogLeftYPositive.FormattingEnabled = true;
+            this.dropAnalogLeftYPositive.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogLeftYPositive.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropLYUp.Location = new System.Drawing.Point(96, 167);
-            this.dropLYUp.Name = "dropLYUp";
-            this.dropLYUp.Size = new System.Drawing.Size(121, 21);
-            this.dropLYUp.TabIndex = 17;
+            this.dropAnalogLeftYPositive.Location = new System.Drawing.Point(97, 19);
+            this.dropAnalogLeftYPositive.Name = "dropAnalogLeftYPositive";
+            this.dropAnalogLeftYPositive.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogLeftYPositive.TabIndex = 1;
             // 
-            // dropLXDown
+            // dropAnalogLeftXNegative
             // 
-            this.dropLXDown.FormattingEnabled = true;
-            this.dropLXDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropLXDown.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogLeftXNegative.FormattingEnabled = true;
+            this.dropAnalogLeftXNegative.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogLeftXNegative.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropLXDown.Location = new System.Drawing.Point(97, 117);
-            this.dropLXDown.Name = "dropLXDown";
-            this.dropLXDown.Size = new System.Drawing.Size(121, 21);
-            this.dropLXDown.TabIndex = 20;
+            this.dropAnalogLeftXNegative.Location = new System.Drawing.Point(97, 73);
+            this.dropAnalogLeftXNegative.Name = "dropAnalogLeftXNegative";
+            this.dropAnalogLeftXNegative.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogLeftXNegative.TabIndex = 5;
             // 
-            // dropLYDown
+            // dropAnalogLeftYNegative
             // 
-            this.dropLYDown.FormattingEnabled = true;
-            this.dropLYDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dropLYDown.Items.AddRange(new object[] {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            this.dropAnalogLeftYNegative.FormattingEnabled = true;
+            this.dropAnalogLeftYNegative.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dropAnalogLeftYNegative.Items.AddRange(new object[] {
             "",
             "",
             "",
             "",
             ""});
-            this.dropLYDown.Location = new System.Drawing.Point(97, 220);
-            this.dropLYDown.Name = "dropLYDown";
-            this.dropLYDown.Size = new System.Drawing.Size(121, 21);
-            this.dropLYDown.TabIndex = 18;
+            this.dropAnalogLeftYNegative.Location = new System.Drawing.Point(97, 46);
+            this.dropAnalogLeftYNegative.Name = "dropAnalogLeftYNegative";
+            this.dropAnalogLeftYNegative.Size = new System.Drawing.Size(121, 21);
+            this.dropAnalogLeftYNegative.TabIndex = 3;
             // 
             // ControllerOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 625);
-            this.Controls.Add(this.groupBoxAnalogL);
-            this.Controls.Add(this.groupBoxAnalogR);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBoxDPad);
+            this.ClientSize = new System.Drawing.Size(706, 361);
+            this.Controls.Add(this.groupBoxAnalogLeft);
+            this.Controls.Add(this.groupBoxAnalogRight);
+            this.Controls.Add(this.groupBoxDigital);
             this.Controls.Add(this.groupBoxButtons);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1196,81 +876,77 @@
             this.Text = "Controller Options";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.onClose);
             this.Load += new System.EventHandler(this.ControllerOptions_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel.ResumeLayout(false);
             this.groupBoxButtons.ResumeLayout(false);
             this.groupBoxButtons.PerformLayout();
-            this.groupBoxDPad.ResumeLayout(false);
-            this.groupBoxDPad.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBoxAnalogR.ResumeLayout(false);
-            this.groupBoxAnalogR.PerformLayout();
-            this.groupBoxAnalogL.ResumeLayout(false);
-            this.groupBoxAnalogL.PerformLayout();
+            this.groupBoxDigital.ResumeLayout(false);
+            this.groupBoxDigital.PerformLayout();
+            this.groupBoxAnalogRight.ResumeLayout(false);
+            this.groupBoxAnalogRight.PerformLayout();
+            this.groupBoxAnalogLeft.ResumeLayout(false);
+            this.groupBoxAnalogLeft.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label labelA;
-        private MultiLevelComboBox dropA;
-        private MultiLevelComboBox dropB;
-        private MultiLevelComboBox dropX;
-        private MultiLevelComboBox dropY;
-        private System.Windows.Forms.Label labelB;
-        private System.Windows.Forms.Label labelX;
-        private System.Windows.Forms.Label labelY;
-        private MultiLevelComboBox dropUp;
-        private MultiLevelComboBox dropDown;
-        private MultiLevelComboBox dropLeft;
-        private MultiLevelComboBox dropRight;
-        private System.Windows.Forms.Label labelUp;
-        private System.Windows.Forms.Label labelDown;
-        private System.Windows.Forms.Label labelLeft;
-        private System.Windows.Forms.Label labelRight;
-        private MultiLevelComboBox dropBack;
-        private MultiLevelComboBox dropStart;
-        private MultiLevelComboBox dropHome;
-        private System.Windows.Forms.Label labelRT;
-        private System.Windows.Forms.Label labelLT;
-        private System.Windows.Forms.Label labelRB;
-        private System.Windows.Forms.Label labelLB;
-        private System.Windows.Forms.Label labelBack;
-        private System.Windows.Forms.Label labelStart;
-        private System.Windows.Forms.Label labelHome;
-        private MultiLevelComboBox dropRA;
-        private MultiLevelComboBox dropLA;
-        private MultiLevelComboBox dropRXUp;
-        private MultiLevelComboBox dropRYUp;
-        private MultiLevelComboBox dropLXUp;
-        private MultiLevelComboBox dropLYUp;
-        private System.Windows.Forms.Label labelRA;
-        private System.Windows.Forms.Label labelLA;
-        private System.Windows.Forms.Label labelLXUp;
-        private System.Windows.Forms.Label labelRX;
-        private System.Windows.Forms.Label labelLYUp;
-        private System.Windows.Forms.Label labelRY;
+        private System.Windows.Forms.Label labelButtonA;
+        private MultiLevelComboBox dropButtonA;
+        private MultiLevelComboBox dropButtonB;
+        private MultiLevelComboBox dropButtonX;
+        private MultiLevelComboBox dropButtonY;
+        private System.Windows.Forms.Label labelButtonB;
+        private System.Windows.Forms.Label labelButtonX;
+        private System.Windows.Forms.Label labelButtonY;
+        private MultiLevelComboBox dropDigitalUp;
+        private MultiLevelComboBox dropDigitalDown;
+        private MultiLevelComboBox dropDigitalLeft;
+        private MultiLevelComboBox dropDigitalRight;
+        private System.Windows.Forms.Label labelDigitalUp;
+        private System.Windows.Forms.Label labelDigitalDown;
+        private System.Windows.Forms.Label labelDigitalLeft;
+        private System.Windows.Forms.Label labelDigitalRight;
+        private MultiLevelComboBox dropButtonBack;
+        private MultiLevelComboBox dropButtonStart;
+        private MultiLevelComboBox dropButtonHome;
+        private System.Windows.Forms.Label labelTriggerRight;
+        private System.Windows.Forms.Label labelTriggerLeft;
+        private System.Windows.Forms.Label labelBumperRight;
+        private System.Windows.Forms.Label labelBumperLeft;
+        private System.Windows.Forms.Label labelButtonBack;
+        private System.Windows.Forms.Label labelButtonStart;
+        private System.Windows.Forms.Label labelButtonHome;
+        private MultiLevelComboBox dropAnalogRightButton;
+        private MultiLevelComboBox dropAnalogLeftButton;
+        private MultiLevelComboBox dropAnalogRightXPositive;
+        private MultiLevelComboBox dropAnalogRightYPositive;
+        private MultiLevelComboBox dropAnalogLeftXPositive;
+        private MultiLevelComboBox dropAnalogLeftYPositive;
+        private System.Windows.Forms.Label labelAnalogRightButton;
+        private System.Windows.Forms.Label labelAnalogLeftButton;
+        private System.Windows.Forms.Label labelAnalogLeftXPositive;
+        private System.Windows.Forms.Label labelAnalogRightXPositive;
+        private System.Windows.Forms.Label labelAnalogLeftYPositive;
+        private System.Windows.Forms.Label labelAnalogRightYPositive;
         private System.Windows.Forms.Label hintLabel;
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label labelLXDown;
-        private MultiLevelComboBox dropLXDown;
-        private System.Windows.Forms.Label labelLYDown;
-        private MultiLevelComboBox dropLYDown;
-        private System.Windows.Forms.Label label1;
-        private MultiLevelComboBox dropRXDown;
-        private System.Windows.Forms.Label labelRYDown;
-        private MultiLevelComboBox dropRYDown;
+        private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.Label labelAnalogLeftXNegative;
+        private MultiLevelComboBox dropAnalogLeftXNegative;
+        private System.Windows.Forms.Label labelAnalogLeftYNegative;
+        private MultiLevelComboBox dropAnalogLeftYNegative;
+        private System.Windows.Forms.Label labelAnalogRightXNegative;
+        private MultiLevelComboBox dropAnalogRightXNegative;
+        private System.Windows.Forms.Label labelAnalogRightYNegative;
+        private MultiLevelComboBox dropAnalogRightYNegative;
         private System.Windows.Forms.GroupBox groupBoxButtons;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private MultiLevelComboBox multiLevelComboBox1;
-        private MultiLevelComboBox multiLevelComboBox2;
-        private MultiLevelComboBox multiLevelComboBox3;
-        private MultiLevelComboBox multiLevelComboBox4;
-        private System.Windows.Forms.GroupBox groupBoxAnalogR;
-        private System.Windows.Forms.GroupBox groupBoxAnalogL;
-        private System.Windows.Forms.GroupBox groupBoxDPad;
+        private MultiLevelComboBox dropTriggerLeft;
+        private MultiLevelComboBox dropBumperRight;
+        private MultiLevelComboBox dropBumperLeft;
+        private MultiLevelComboBox dropTriggerRight;
+        private System.Windows.Forms.GroupBox groupBoxAnalogRight;
+        private System.Windows.Forms.GroupBox groupBoxAnalogLeft;
+        private System.Windows.Forms.GroupBox groupBoxDigital;
     }
 }
