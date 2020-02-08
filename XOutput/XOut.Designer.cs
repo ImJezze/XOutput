@@ -29,84 +29,90 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.StartStopBtn = new System.Windows.Forms.Button();
-            this.isExclusive = new System.Windows.Forms.CheckBox();
+            this.startStopButton = new System.Windows.Forms.Button();
+            this.exclusiveCheckBox = new System.Windows.Forms.CheckBox();
             this.controllerList = new System.Windows.Forms.CheckedListBox();
             this.settingsLabel = new System.Windows.Forms.LinkLabel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.tipLabel = new System.Windows.Forms.Label();
+            this.hintLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // StartStopBtn
+            // startStopButton
             // 
-            this.StartStopBtn.Location = new System.Drawing.Point(397, 316);
-            this.StartStopBtn.Name = "StartStopBtn";
-            this.StartStopBtn.Size = new System.Drawing.Size(75, 23);
-            this.StartStopBtn.TabIndex = 0;
-            this.StartStopBtn.Text = "Start";
-            this.StartStopBtn.UseVisualStyleBackColor = true;
-            this.StartStopBtn.Click += new System.EventHandler(this.StartStopBtn_Click);
+            this.startStopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.startStopButton.Location = new System.Drawing.Point(409, 182);
+            this.startStopButton.Name = "startStopButton";
+            this.startStopButton.Size = new System.Drawing.Size(75, 23);
+            this.startStopButton.TabIndex = 0;
+            this.startStopButton.Text = "Start";
+            this.startStopButton.UseVisualStyleBackColor = true;
+            this.startStopButton.Click += new System.EventHandler(this.StartStopButton_Click);
             // 
-            // isExclusive
+            // exclusiveCheckBox
             // 
-            this.isExclusive.AutoSize = true;
-            this.isExclusive.Location = new System.Drawing.Point(12, 320);
-            this.isExclusive.Name = "isExclusive";
-            this.isExclusive.Size = new System.Drawing.Size(75, 17);
-            this.isExclusive.TabIndex = 9;
-            this.isExclusive.Text = "Exclusivity";
-            this.isExclusive.UseVisualStyleBackColor = true;
-            this.isExclusive.CheckedChanged += new System.EventHandler(this.isExclusive_CheckedChanged);
+            this.exclusiveCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.exclusiveCheckBox.Location = new System.Drawing.Point(12, 187);
+            this.exclusiveCheckBox.Name = "exclusiveCheckBox";
+            this.exclusiveCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.exclusiveCheckBox.TabIndex = 9;
+            this.exclusiveCheckBox.Text = "Exclusivity";
+            this.exclusiveCheckBox.UseVisualStyleBackColor = true;
+            this.exclusiveCheckBox.CheckedChanged += new System.EventHandler(this.ExclusiveCheckBox_CheckedChanged);
             // 
             // controllerList
             // 
+            this.controllerList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.controllerList.CheckOnClick = true;
             this.controllerList.FormattingEnabled = true;
+            this.controllerList.IntegralHeight = false;
             this.controllerList.Location = new System.Drawing.Point(12, 12);
             this.controllerList.Name = "controllerList";
-            this.controllerList.Size = new System.Drawing.Size(460, 289);
+            this.controllerList.Size = new System.Drawing.Size(472, 156);
             this.controllerList.TabIndex = 10;
-            this.controllerList.MouseEnter += new System.EventHandler(this.controllerList_MouseEnter);
-            this.controllerList.MouseLeave += new System.EventHandler(this.controllerList_MouseLeave);
-            this.controllerList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.controllerList_MouseUp);
+            this.controllerList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ControllerList_ItemCheck);
+            this.controllerList.MouseEnter += new System.EventHandler(this.ControllerList_MouseEnter);
+            this.controllerList.MouseLeave += new System.EventHandler(this.ControllerList_MouseLeave);
+            this.controllerList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ControllerList_MouseUp);
             // 
             // settingsLabel
             // 
-            this.settingsLabel.AutoSize = true;
-            this.settingsLabel.Location = new System.Drawing.Point(93, 321);
+            this.settingsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.settingsLabel.Location = new System.Drawing.Point(93, 188);
             this.settingsLabel.Name = "settingsLabel";
-            this.settingsLabel.Size = new System.Drawing.Size(70, 13);
+            this.settingsLabel.Size = new System.Drawing.Size(73, 13);
             this.settingsLabel.TabIndex = 11;
             this.settingsLabel.TabStop = true;
             this.settingsLabel.Text = "Control Panel";
-            this.settingsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.settingsLabel_LinkClicked);
+            this.settingsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SettingsLabel_LinkClicked);
             // 
             // notifyIcon
             // 
             this.notifyIcon.Text = "XOutput";
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
             // 
-            // tipLabel
+            // hintLabel
             // 
-            this.tipLabel.AutoSize = true;
-            this.tipLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.tipLabel.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.tipLabel.Location = new System.Drawing.Point(170, 320);
-            this.tipLabel.Name = "tipLabel";
-            this.tipLabel.Size = new System.Drawing.Size(44, 13);
-            this.tipLabel.TabIndex = 12;
-            this.tipLabel.Text = "tipLabel";
+            this.hintLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hintLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.hintLabel.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.hintLabel.Location = new System.Drawing.Point(172, 187);
+            this.hintLabel.Name = "hintLabel";
+            this.hintLabel.Size = new System.Drawing.Size(231, 13);
+            this.hintLabel.TabIndex = 12;
             // 
             // XOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 355);
-            this.Controls.Add(this.tipLabel);
+            this.ClientSize = new System.Drawing.Size(496, 217);
+            this.Controls.Add(this.hintLabel);
             this.Controls.Add(this.settingsLabel);
             this.Controls.Add(this.controllerList);
-            this.Controls.Add(this.isExclusive);
-            this.Controls.Add(this.StartStopBtn);
+            this.Controls.Add(this.exclusiveCheckBox);
+            this.Controls.Add(this.startStopButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "XOut";
@@ -116,23 +122,19 @@
             this.Shown += new System.EventHandler(this.XOut_Shown);
             this.Resize += new System.EventHandler(this.XOut_Resize);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button StartStopBtn;
-
-        private System.Windows.Forms.GroupBox[] boxes;
-        private System.Windows.Forms.CheckBox[] checks;
-        private System.Windows.Forms.Button[] options;
+        private System.Windows.Forms.Button startStopButton;
+        
         private ControllerOptions optionsWindow;
         private ControllerManager controllerManager;
-        private System.Windows.Forms.CheckBox isExclusive;
+        private System.Windows.Forms.CheckBox exclusiveCheckBox;
         private System.Windows.Forms.CheckedListBox controllerList;
         private System.Windows.Forms.LinkLabel settingsLabel;
         private System.Windows.Forms.NotifyIcon notifyIcon;
-        private System.Windows.Forms.Label tipLabel;
+        private System.Windows.Forms.Label hintLabel;
     }
 }

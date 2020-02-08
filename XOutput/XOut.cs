@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace XOutput
 {
@@ -9,10 +10,9 @@ namespace XOutput
         public XOut()
         {
             InitializeComponent();
+
             this.Icon = Properties.Resources.AppIcon;
             notifyIcon.Icon = Properties.Resources.AppIconInactive;
-            tipLabel.Text = "";
-            this.controllerList.ItemCheck += (sender, e) => enabledChanged(e.Index, e.NewValue);
         }
 
         private void XOut_Load(object sender, EventArgs e)
@@ -31,19 +31,20 @@ namespace XOutput
             {
                 controllerManager.Stop();
             }
+
             notifyIcon.Visible = false;
         }
 
-        private void StartStopBtn_Click(object sender, EventArgs e)
+        private void StartStopButton_Click(object sender, EventArgs e)
         {
-            if (StartStopBtn.Text == "Start")
+            if (!controllerManager.running)
             {
                 if (controllerManager.Start())
                 {
-                    StartStopBtn.Text = "Stop";
+                    startStopButton.Text = "Stop";
                     controllerList.Enabled = false;
-                    isExclusive.Enabled = false;
-                    notifyIcon.Text = ("XOutput\nEmulating " + controllerManager.pluggedDevices + " device(s).");
+                    exclusiveCheckBox.Enabled = false;
+                    notifyIcon.Text = $"XOutput\nEmulating {controllerManager.pluggedDevices} device(s).";
                     notifyIcon.Icon = Properties.Resources.AppIcon;
                 }
             }
@@ -51,10 +52,10 @@ namespace XOutput
             {
                 if (controllerManager.Stop())
                 {
-                    StartStopBtn.Text = "Start";
+                    startStopButton.Text = "Start";
                     controllerList.Enabled = true;
-                    isExclusive.Enabled = true;
-                    notifyIcon.Text = ("XOutput");
+                    exclusiveCheckBox.Enabled = true;
+                    notifyIcon.Text = "XOutput";
                     notifyIcon.Icon = Properties.Resources.AppIconInactive;
                 }
             }
@@ -64,7 +65,10 @@ namespace XOutput
         {
             if (controllerList.Items.Count > dev.Count)
             {
-                for (int i = 0; i < (controllerList.Items.Count - dev.Count); i++) controllerList.Items.RemoveAt(controllerList.Items.Count - 1 + i);
+                for (int i = 0; i < controllerList.Items.Count - dev.Count; i++)
+                {
+                    controllerList.Items.RemoveAt(controllerList.Items.Count - 1 + i);
+                }
             }
 
             for (int i = 0; i < dev.Count; i++)
@@ -75,7 +79,8 @@ namespace XOutput
                     {
                         controllerList.Items.RemoveAt(i);
                     }
-                    controllerList.Items.Insert(i, (i + 1).ToString() + ": " + dev[i].name + " (" + dev[i].joystick.Information.InstanceGuid + ")");
+
+                    controllerList.Items.Insert(i, $"{i + 1}: {dev[i].name} ({dev[i].joystick.Information.InstanceGuid})");
                     controllerList.SetItemChecked(i, dev[i].enabled);
                 }
                 else
@@ -88,27 +93,30 @@ namespace XOutput
             }
         }
 
-        private void enabledChanged(int i, CheckState st)
+        private void ControllerList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             bool enable = true;
-     
-            switch (st)
+
+            switch (e.NewValue)
             {
                 case CheckState.Checked:
                     enable = true;
                     break;
+
                 case CheckState.Unchecked:
                     enable = false;
                     break;
+
                 default:
                     break;
             }
-            controllerManager.setControllerEnable(i, enable);
 
-            Console.WriteLine("Controller {0} enabled: {1}", i, enable);
+            controllerManager.setControllerEnable(e.Index, enable);
+
+            Trace.WriteLine($"Controller {e.Index} enabled: {enable}");
         }
 
-        private void openOptions(int i)
+        private void OpenOptions(int i)
         {
             if (i >= 0)
             {
@@ -135,15 +143,17 @@ namespace XOutput
             notifyIcon.Visible = false;
         }
 
-        protected override void WndProc(ref Message m)    //update controllers on device change
+        protected override void WndProc(ref Message m)
         {
             try
             {
+                // update controllers on device change
                 if (m.Msg == 0x0219)
                 {
                     lock (this)
                     {
-                        Console.WriteLine("Device change detected. Updating devices...");
+                        Trace.WriteLine("Device change detected. Updating devices...");
+
                         UpdateInfo(controllerManager.detectControllers());
                     }
                 }
@@ -153,34 +163,34 @@ namespace XOutput
             base.WndProc(ref m);
         }
 
-        private void isExclusive_CheckedChanged(object sender, EventArgs e)
+        private void ExclusiveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             controllerManager.isExclusive = !controllerManager.isExclusive;
         }
 
-        private void controllerList_MouseUp(object sender, MouseEventArgs e)
+        private void ControllerList_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right && this.controllerList.IndexFromPoint(e.Location) >= 0)
             {
                 int index = this.controllerList.IndexFromPoint(e.Location);
                 controllerList.SetSelected(index, true);
-                openOptions(index);
+                OpenOptions(index);
             }
         }
 
-        private void settingsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void SettingsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("control", "joy.cpl");
         }
 
-        private void controllerList_MouseEnter(object sender, EventArgs e)
+        private void ControllerList_MouseEnter(object sender, EventArgs e)
         {
-            tipLabel.Text = "Right-click for options.";
+            hintLabel.Text = "Right-click for options.";
         }
 
-        private void controllerList_MouseLeave(object sender, EventArgs e)
+        private void ControllerList_MouseLeave(object sender, EventArgs e)
         {
-            tipLabel.Text = "";
+            hintLabel.Text = string.Empty;
         }
     }
 }
