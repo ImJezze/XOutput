@@ -1,2 +1,5 @@
-XOutput/obj/
 .vs/
+packages/
+XOutput/obj/
+XOutput/bin/
+*.user
