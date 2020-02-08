@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XOut));
             this.StartStopBtn = new System.Windows.Forms.Button();
             this.isExclusive = new System.Windows.Forms.CheckBox();
             this.controllerList = new System.Windows.Forms.CheckedListBox();
@@ -84,7 +83,6 @@
             // 
             // notifyIcon
             // 
-            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "XOutput";
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
             // 
@@ -110,7 +108,6 @@
             this.Controls.Add(this.isExclusive);
             this.Controls.Add(this.StartStopBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "XOut";
             this.Text = "XOutput";

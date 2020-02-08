@@ -1,5 +1,4 @@
-﻿using SlimDX.DirectInput;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
@@ -7,10 +6,11 @@ namespace XOutput
 {
     public partial class XOut : Form
     {
-
         public XOut()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.AppIcon;
+            notifyIcon.Icon = Properties.Resources.AppIconInactive;
             tipLabel.Text = "";
             this.controllerList.ItemCheck += (sender, e) => enabledChanged(e.Index, e.NewValue);
         }

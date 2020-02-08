@@ -135,19 +135,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow_Down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow_Up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\gear.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\activeIcon.bmp" />
     <None Include="Resources\XOutput_Icon.ico" />
     <None Include="Resources\XOutput_Icon-Inactive.ico" />
-    <Content Include="Resources\XOutput_Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
